@@ -63,9 +63,6 @@ namespace WebApplication1.Controllers
 
             if (email != null && aluno != null)
             {
-
-                //db.Alunos.Where(x => x.Nome == email).FirstOrDefault().Preferencias.Add(db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault());
-                //proposta.AlunoAtribuidoId = aluno.;
                 aluno.Preferencias.Add(proposta);
                 db.SaveChanges();
                 return RedirectToAction("ConsultarPreferencias");
