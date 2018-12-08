@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "ListarPropostas";
+}
+
+<h2>ListarPropostas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalEstagio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objetivos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlunoAtribuidoId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalEstagio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoProposta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Objetivos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlunoAtribuidoId)
+            </td>
+            <td>
+                @if (User.IsInRole("Aluno"))
+                {
+                    @Html.ActionLink("Candidatar-me", "Candidatura", "Alunos",  new { id = item.PropostaId }, null)
+                }
+                @if (User.IsInRole("Docente"))
+                {
+                    @Html.ActionLink("Aceitar", "AceitarProposta", new { id = item.PropostaId })
+                    @Html.ActionLink("Regeitar", "RegeitarProposta", new { id = item.PropostaId })
+                }
+                @*@if (User.IsInRole("Empresa"))
+                {
+                    @Html.ActionLink("Edit", "AceitarProposta", new { id = item.PropostaId })
+                }*@
+            </td>
+        </tr>
+    }
+
+</table>

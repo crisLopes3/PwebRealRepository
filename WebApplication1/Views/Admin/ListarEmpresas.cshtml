@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApplication1.Models.Empresa>
+
+@{
+    ViewBag.Title = "ListarEmpresas";
+}
+
+<h2>ListarEmpresas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmpresaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmpresaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmpresaId })
+        </td>
+    </tr>
+}
+
+</table>
