@@ -36,5 +36,13 @@ namespace WebApplication1.Models
         //        WithRequired(p => p.AlunoAtribuido);
         //}
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Aluno>()
+                .HasOptional(a => a.AlunoPropostaAtribuida)
+                .WithOptionalPrincipal(p => p.PropostaAlunoAtribuido);
+
+        }
     }
 }

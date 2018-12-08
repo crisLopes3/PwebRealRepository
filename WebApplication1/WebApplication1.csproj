@@ -205,9 +205,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812082003376_m1.cs" />
-    <Compile Include="Migrations\201812082003376_m1.Designer.cs">
-      <DependentUpon>201812082003376_m1.cs</DependentUpon>
+    <Compile Include="Migrations\201812082242377_m1.cs" />
+    <Compile Include="Migrations\201812082242377_m1.Designer.cs">
+      <DependentUpon>201812082242377_m1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812082253122_m2.cs" />
+    <Compile Include="Migrations\201812082253122_m2.Designer.cs">
+      <DependentUpon>201812082253122_m2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812082255479_m3.cs" />
+    <Compile Include="Migrations\201812082255479_m3.Designer.cs">
+      <DependentUpon>201812082255479_m3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -224,10 +232,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BD.mdf" />
-    <Content Include="App_Data\BD_log.ldf">
-      <DependentUpon>BD.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -309,10 +313,18 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812082003376_m1.resx">
-      <DependentUpon>201812082003376_m1.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812082242377_m1.resx">
+      <DependentUpon>201812082242377_m1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812082253122_m2.resx">
+      <DependentUpon>201812082253122_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812082255479_m3.resx">
+      <DependentUpon>201812082255479_m3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

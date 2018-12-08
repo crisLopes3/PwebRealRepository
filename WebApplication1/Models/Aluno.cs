@@ -27,9 +27,15 @@ namespace WebApplication1.Models
         public string DisciplinasFeitas { get; set; }
 
 
-        public int? PropostaId { get; set; }
-        [ForeignKey("PropostaId")]
-        public virtual Proposta PropostaAtribuida { get; set; }
+        //public string DisciplinasFeitas_teste { get; set; }
+
+        //[ForeignKey("PropostaId")]
+        //public virtual Proposta AlunoPropostaAtribuida { get; set; }
+        //[InverseProperty("Proposta")]
+        //public virtual ICollection<Proposta> PropostaAtribuidas { get; set; }
+        //[ForeignKey("AlunoPropostaAtribuida")]
+        //public int? AlunoPropostaAtribuidaId { get; set; }
+        public virtual Proposta AlunoPropostaAtribuida { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }

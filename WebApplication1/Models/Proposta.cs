@@ -9,7 +9,7 @@ namespace WebApplication1.Models
 {
     public class Proposta
     {
-        [ForeignKey("AlunoAtribuido")]
+        //[ForeignKey("AlunoAtribuido")]
         public int PropostaId { get; set; }
 
         [Required]
@@ -37,9 +37,13 @@ namespace WebApplication1.Models
         [DataType(DataType.MultilineText)]
         public string Objetivos { get; set; }
 
-        public int? AlunoId { get; set; }
-        [ForeignKey("AlunoId")]
-        public virtual Aluno AlunoAtribuido { get; set; }
+        //public int? AlunoId { get; set; }
+        //[ForeignKey("AlunoPropostaAtribuida")]
+        //public int? AlunoPropostaAtribuidaId { get; set; }
+        public virtual Aluno PropostaAlunoAtribuido { get; set; }
+        //[InverseProperty("Aluno")]
+        //public virtual ICollection<Aluno> AlunoAtribuidos { get; set; }
+
 
         [InverseProperty("Preferencias")]
         public virtual ICollection<Aluno> Alunos { get; set; }
