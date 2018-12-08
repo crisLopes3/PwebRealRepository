@@ -18,16 +18,23 @@ namespace WebApplication1.Models
         public DbSet<Proposta> Propostas { get; set; }
 
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Aluno>().HasMany<Proposta>(p => p.Preferencias)
-                .WithMany(a => a.AlunosCandidatados)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("AlunoId").MapRightKey("PropostaId").ToTable("AlunosPropostas");
-                });
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    modelBuilder.Entity<Aluno>().HasMany<Proposta>(p => p.Preferencias)
+        //        .WithMany(a => a.Alunos)
+        //        .Map(cs =>
+        //        {
+        //            cs.MapLeftKey("AlunoId").MapRightKey("PropostaId").ToTable("AlunosPropostas");
+        //        });
+        //}
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    modelBuilder.Entity<Aluno>().HasOptional(a => a.PropostaAtribuida).
+        //        WithRequired(p => p.AlunoAtribuido);
+        //}
 
     }
 }

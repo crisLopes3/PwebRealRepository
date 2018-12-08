@@ -16,7 +16,7 @@ namespace WebApplication1.Migrations
                         Ramo = c.Int(nullable: false),
                         DisciplinasPorFazer = c.String(nullable: false),
                         DisciplinasFeitas = c.String(nullable: false),
-                        PropostaAtribuidaId = c.Int(),
+                        PropostaId = c.Int(),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.AlunoId)
@@ -85,25 +85,27 @@ namespace WebApplication1.Migrations
                 "dbo.Propostas",
                 c => new
                     {
-                        PropostaId = c.Int(nullable: false, identity: true),
+                        PropostaId = c.Int(nullable: false),
                         Descricao = c.String(nullable: false),
                         LocalEstagio = c.String(nullable: false),
                         TipoProposta = c.Int(nullable: false),
                         Ramo = c.Int(nullable: false),
-                        estado = c.Boolean(nullable: false),
+                        Estado = c.Boolean(nullable: false),
                         DataInicio = c.DateTime(nullable: false),
                         DataFim = c.DateTime(nullable: false),
                         Objetivos = c.String(),
-                        AlunoAtribuidoId = c.Int(),
+                        AlunoId = c.Int(),
                     })
-                .PrimaryKey(t => t.PropostaId);
+                .PrimaryKey(t => t.PropostaId)
+                .ForeignKey("dbo.Alunos", t => t.PropostaId)
+                .Index(t => t.PropostaId);
             
             CreateTable(
                 "dbo.Docentes",
                 c => new
                     {
                         DocenteId = c.Int(nullable: false, identity: true),
-                        pertenceComissao = c.Boolean(nullable: false),
+                        PertenceComissao = c.Boolean(nullable: false),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.DocenteId)
@@ -132,6 +134,19 @@ namespace WebApplication1.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.PropostaAlunoes",
+                c => new
+                    {
+                        Proposta_PropostaId = c.Int(nullable: false),
+                        Aluno_AlunoId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Proposta_PropostaId, t.Aluno_AlunoId })
+                .ForeignKey("dbo.Propostas", t => t.Proposta_PropostaId, cascadeDelete: true)
+                .ForeignKey("dbo.Alunos", t => t.Aluno_AlunoId, cascadeDelete: true)
+                .Index(t => t.Proposta_PropostaId)
+                .Index(t => t.Aluno_AlunoId);
+            
+            CreateTable(
                 "dbo.DocentePropostas",
                 c => new
                     {
@@ -157,54 +172,43 @@ namespace WebApplication1.Migrations
                 .Index(t => t.Empresa_EmpresaId)
                 .Index(t => t.Proposta_PropostaId);
             
-            CreateTable(
-                "dbo.AlunosPropostas",
-                c => new
-                    {
-                        AlunoId = c.Int(nullable: false),
-                        PropostaId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.AlunoId, t.PropostaId })
-                .ForeignKey("dbo.Alunos", t => t.AlunoId, cascadeDelete: true)
-                .ForeignKey("dbo.Propostas", t => t.PropostaId, cascadeDelete: true)
-                .Index(t => t.AlunoId)
-                .Index(t => t.PropostaId);
-            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AlunosPropostas", "PropostaId", "dbo.Propostas");
-            DropForeignKey("dbo.AlunosPropostas", "AlunoId", "dbo.Alunos");
             DropForeignKey("dbo.EmpresaPropostas", "Proposta_PropostaId", "dbo.Propostas");
             DropForeignKey("dbo.EmpresaPropostas", "Empresa_EmpresaId", "dbo.Empresas");
             DropForeignKey("dbo.Empresas", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.DocentePropostas", "Proposta_PropostaId", "dbo.Propostas");
             DropForeignKey("dbo.DocentePropostas", "Docente_DocenteId", "dbo.Docentes");
             DropForeignKey("dbo.Docentes", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.PropostaAlunoes", "Aluno_AlunoId", "dbo.Alunos");
+            DropForeignKey("dbo.PropostaAlunoes", "Proposta_PropostaId", "dbo.Propostas");
+            DropForeignKey("dbo.Propostas", "PropostaId", "dbo.Alunos");
             DropForeignKey("dbo.Alunos", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.AlunosPropostas", new[] { "PropostaId" });
-            DropIndex("dbo.AlunosPropostas", new[] { "AlunoId" });
             DropIndex("dbo.EmpresaPropostas", new[] { "Proposta_PropostaId" });
             DropIndex("dbo.EmpresaPropostas", new[] { "Empresa_EmpresaId" });
             DropIndex("dbo.DocentePropostas", new[] { "Proposta_PropostaId" });
             DropIndex("dbo.DocentePropostas", new[] { "Docente_DocenteId" });
+            DropIndex("dbo.PropostaAlunoes", new[] { "Aluno_AlunoId" });
+            DropIndex("dbo.PropostaAlunoes", new[] { "Proposta_PropostaId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Empresas", new[] { "UserId" });
             DropIndex("dbo.Docentes", new[] { "UserId" });
+            DropIndex("dbo.Propostas", new[] { "PropostaId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Alunos", new[] { "UserId" });
-            DropTable("dbo.AlunosPropostas");
             DropTable("dbo.EmpresaPropostas");
             DropTable("dbo.DocentePropostas");
+            DropTable("dbo.PropostaAlunoes");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Empresas");
             DropTable("dbo.Docentes");

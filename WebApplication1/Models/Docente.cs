@@ -12,17 +12,17 @@ namespace WebApplication1.Models
     {
         public int DocenteId { get; set; }
 
-        public bool pertenceComissao  { get; set; }
+        public bool PertenceComissao  { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        public IList<Proposta> Propostas { get; set; }
+        public virtual ICollection<Proposta> Propostas { get; set; }
 
         public Docente()
         {
-            Propostas = new List<Proposta>();
+            Propostas = new HashSet<Proposta>();
         }
     }
 }

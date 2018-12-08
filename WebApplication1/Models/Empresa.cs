@@ -15,11 +15,11 @@ namespace WebApplication1.Models
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        public IList<Proposta> Propostas { get; set; }
+        public virtual ICollection<Proposta> Propostas { get; set; }
 
         public Empresa()
         {
-            Propostas = new List<Proposta>();
+            Propostas = new HashSet<Proposta>();
         }
     }
 }

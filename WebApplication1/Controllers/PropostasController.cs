@@ -71,7 +71,7 @@ namespace WebApplication1.Controllers
 
             if(proposta != null)
             {
-                proposta.estado = true;
+                proposta.Estado = true;
                 db.SaveChanges();
             }
 
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
 
             if (proposta != null)
             {
-                proposta.estado = false;
+                proposta.Estado = false;
                 db.SaveChanges();
             }
 

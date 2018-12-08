@@ -9,6 +9,7 @@ namespace WebApplication1.Models
 {
     public class Proposta
     {
+        [ForeignKey("AlunoAtribuido")]
         public int PropostaId { get; set; }
 
         [Required]
@@ -18,12 +19,12 @@ namespace WebApplication1.Models
         public string LocalEstagio { get; set; }
 
         [Required]
-        public TipoProposta? TipoProposta { get; set; }
+        public TipoProposta TipoProposta { get; set; }
 
         [Required]
-        public Ramo? Ramo { get; set; }
+        public Ramo Ramo { get; set; }
 
-        public bool estado { get; set; } = false;
+        public bool Estado { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -36,14 +37,20 @@ namespace WebApplication1.Models
         [DataType(DataType.MultilineText)]
         public string Objetivos { get; set; }
 
+        public int? AlunoId { get; set; }
+        [ForeignKey("AlunoId")]
+        public virtual Aluno AlunoAtribuido { get; set; }
 
-        //[ForeignKey("AlunoAtribuido")]
-        public int? AlunoAtribuidoId { get; set; }
-        //public Aluno AlunoAtribuido { get; set; }
+        [InverseProperty("Preferencias")]
+        public virtual ICollection<Aluno> Alunos { get; set; }
+        public virtual ICollection<Docente> Docentes { get; set; }
+        public virtual ICollection<Empresa> Empresas { get; set; }
 
-        //[InverseProperty("Preferencias")]
-        public IList<Aluno> AlunosCandidatados { get; set; }
-        public IList<Docente> Docentes { get; set; }
-        public IList<Empresa> Empresas { get; set; }
+        public Proposta()
+        {
+            Alunos = new HashSet<Aluno>();
+            Docentes = new HashSet<Docente>();
+            Empresas = new HashSet<Empresa>();
+        }
     }
 }

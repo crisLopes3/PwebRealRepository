@@ -18,7 +18,7 @@ namespace WebApplication1.Models
         public string Nome { get; set; }
 
         [Required]
-        public Ramo? Ramo { get; set; }
+        public Ramo Ramo { get; set; }
 
         [Required]
         public string DisciplinasPorFazer { get; set; }
@@ -26,20 +26,21 @@ namespace WebApplication1.Models
         [Required]
         public string DisciplinasFeitas { get; set; }
 
-        //[ForeignKey("PropostaAtribuida")]
-        public int? PropostaAtribuidaId { get; set; }
-        //public Proposta PropostaAtribuida { get; set; }
+
+        public int? PropostaId { get; set; }
+        [ForeignKey("PropostaId")]
+        public virtual Proposta PropostaAtribuida { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
         //[InverseProperty("AlunoAtribuido")]
-        public IList<Proposta> Preferencias { get; set; }
+        public virtual ICollection<Proposta> Preferencias { get; set; }
 
         public Aluno()
         {
-            Preferencias = new List<Proposta>();
+            Preferencias = new HashSet<Proposta>();
         }
     }
 }
