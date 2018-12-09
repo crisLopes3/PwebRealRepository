@@ -299,6 +299,7 @@
     <Content Include="Views\Admin\ListarEmpresas.cshtml" />
     <Content Include="Views\Admin\ListarDocentes.cshtml" />
     <Content Include="Views\Account\_PartialViewAluno.cshtml" />
+    <Content Include="Views\Admin\ListarComissao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

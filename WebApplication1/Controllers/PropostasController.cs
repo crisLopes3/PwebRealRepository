@@ -15,16 +15,31 @@ namespace WebApplication1.Controllers
         private Context db = new Context();
 
         // GET: Propostas
-        public ActionResult ListarPropostas()
+        public ActionResult ListarPropostas(int? tipoOrdenacao)
         {
             if(User.IsInRole("Aluno"))
             {
                 int id = Session.Get<int>("UserId");
                 ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
             }
-                
+
+
+            ViewBag.TiposOrdenacao = new SelectList( new List<Object>{
+                       new { value = 0 , text = "Ramo"  },
+                       new { value = 1 , text = "Local de Estágio" },
+                    },"value","text", 2);
+
+
+            if(tipoOrdenacao == 1)
+                return View(db.Propostas.OrderBy(x=>x.LocalEstagio));
+            if (tipoOrdenacao == 0)
+                return View(db.Propostas.OrderBy(x => x.Ramo));
             return View(db.Propostas.ToList());
         }
+
+        
+
+
 
         // GET: Propostas/Create
         public ActionResult Create()

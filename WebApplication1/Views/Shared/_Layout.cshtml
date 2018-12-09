@@ -40,7 +40,7 @@
                                 <li>@Html.ActionLink("Empresas", "ListarEmpresas", "Admin")</li>
                             </ul>
                         </li>
-                        <li>@Html.ActionLink("Comissão", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Comissão", "ListarComissao", "Admin")</li>
                     }
 
                     @if (User.IsInRole("Aluno"))
@@ -63,7 +63,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Submeter Proposta", "Create", "Propostas")</li>
+                                <li>@Html.ActionLink("Nova Proposta", "Create", "Propostas")</li>
                             </ul>
                         </li>
                     }
@@ -75,7 +75,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Submeter Proposta", "Create", "Propostas")</li>
+                                <li>@Html.ActionLink("Nova Proposta", "Create", "Propostas")</li>
                                 <li>@Html.ActionLink("Avaliar Estagiários", "Index", "Home")</li>
                             </ul>
                         </li>

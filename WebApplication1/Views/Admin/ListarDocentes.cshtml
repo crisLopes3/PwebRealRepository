@@ -5,17 +5,13 @@
 }
 
 <h2>ListarDocentes</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ApplicationUser.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pertenceComissao)
+            @Html.DisplayNameFor(model => model.PertenceComissao)
         </th>
         <th></th>
     </tr>
@@ -26,13 +22,29 @@
             @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pertenceComissao)
+            @Html.DisplayFor(modelItem => item.PertenceComissao)
         </td>
-        <td>
+
+        @if (item.PertenceComissao)
+        {
+            <td>
+                @Html.ActionLink("Retirar da comissao", "RetirarDaComissao", new { id = item.DocenteId }, 
+               new { onclick = "return confirm ('Deseja remover o docente da Comissão?');" })
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Adicionar à comissao", "AdicionarNaComissao", new { id = item.DocenteId }, null)
+            </td>
+        }
+
+
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.DocenteId }) |
             @Html.ActionLink("Details", "Details", new { id=item.DocenteId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.DocenteId })
-        </td>
+        </td>*@
     </tr>
 }
 

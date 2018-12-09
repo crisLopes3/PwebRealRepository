@@ -9,6 +9,15 @@
 <table class="table">
     <tr>
         <th>
+            @*@Html.DropDownList("Ordenar", ((SelectList)ViewBag.TiposOrdenacao),"Ordenar",
+           new { onchange = "location.href='" + @Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 1}) + "'" })*@
+            @Html.DropDownList("Ordenar", ((SelectList)ViewBag.TiposOrdenacao), "Ordenar")
+        </th>
+    </tr>
+    <tr>
+
+
+        <th>
             @Html.DisplayNameFor(model => model.Descricao)
         </th>
         <th>
@@ -87,3 +96,23 @@
     }
 
 </table>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Ordenar").on("change", function (event){
+                var value = $(this).val();
+                if (value === '0') {
+                    location.href = '@Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 0})'
+                }
+                else if (value === '1') {
+                     location.href = '@Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 1})'
+                } else {
+                    alert("Muito Mal");
+                }
+            });
+        });
+    </script>
+}

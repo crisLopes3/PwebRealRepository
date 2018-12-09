@@ -26,5 +26,37 @@ namespace WebApplication1.Controllers
         {
             return View(db.Docentes.ToList());
         }
+
+
+        public ActionResult RetirarDaComissao(int? id)
+        {
+            var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
+
+            if (docente != null)
+            {
+                docente.PertenceComissao = false;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ListarDocentes");
+        }
+
+        public ActionResult AdicionarNaComissao(int? id)
+        {
+            var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
+
+            if (docente != null)
+            {
+                docente.PertenceComissao = true;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ListarDocentes");
+        }
+
+        public ActionResult ListarComissao()
+        {
+            return View(db.Docentes.Where(x=>x.PertenceComissao == true).ToList());
+        }
     }
 }
