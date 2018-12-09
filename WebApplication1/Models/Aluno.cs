@@ -44,6 +44,7 @@ namespace WebApplication1.Models
         //[InverseProperty("AlunoAtribuido")]
         public virtual ICollection<Proposta> Preferencias { get; set; }
 
+
         public Aluno()
         {
             Preferencias = new HashSet<Proposta>();

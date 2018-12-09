@@ -50,6 +50,11 @@ namespace WebApplication1.Models
         public virtual ICollection<Docente> Docentes { get; set; }
         public virtual ICollection<Empresa> Empresas { get; set; }
 
+
+
+        ///////////////////////AVALIACOES   
+        public ICollection<Avaliacao> Avaliacoes { get; set; }
+
         public Proposta()
         {
             Alunos = new HashSet<Aluno>();
