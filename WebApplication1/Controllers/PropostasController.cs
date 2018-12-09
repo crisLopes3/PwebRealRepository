@@ -17,6 +17,12 @@ namespace WebApplication1.Controllers
         // GET: Propostas
         public ActionResult ListarPropostas()
         {
+            if(User.IsInRole("Aluno"))
+            {
+                int id = Session.Get<int>("UserId");
+                ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
+            }
+                
             return View(db.Propostas.ToList());
         }
 

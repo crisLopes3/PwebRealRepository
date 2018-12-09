@@ -85,7 +85,15 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session.Set("ContaCorrente", model.Email);
+                    var userId = UserManager.Find(model.Email, model.Password).Id;
+
+                    int utilizadorId =  Context.Alunos.Where(x => x.UserId == userId).Select(x => x.AlunoId).FirstOrDefault();
+                    if(utilizadorId == 0)
+                        utilizadorId = Context.Empresas.Where(x => x.UserId == userId).Select(x => x.EmpresaId).FirstOrDefault();
+                    if (utilizadorId == 0)
+                        utilizadorId = Context.Docentes.Where(x => x.UserId == userId).Select(x => x.DocenteId).FirstOrDefault();
+                    Session.Set("UserId", utilizadorId);
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -167,6 +175,8 @@ namespace WebApplication1.Controllers
                     await UserManager.AddToRoleAsync(user.Id, model.UserRoles); //associa perfil ao utilizador
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    //Session.Set("UserId", user.Id);
+
                     if (model.UserRoles == "Aluno")
                     {
                         Aluno a = new Aluno()
@@ -178,6 +188,9 @@ namespace WebApplication1.Controllers
                             UserId = user.Id
                         };
                         Context.Alunos.Add(a);
+                        Context.SaveChanges();
+                        Session.Set("UserId", a.AlunoId);
+
                     }
                     if (model.UserRoles == "Docente")
                     {
@@ -186,18 +199,22 @@ namespace WebApplication1.Controllers
                             UserId = user.Id
                         };
                         Context.Docentes.Add(d);
+                        Context.SaveChanges();
+                        Session.Set("UserId", d.DocenteId);
                     }
 
                     if (model.UserRoles == "Empresa")
                     {
-                        Empresa d = new Empresa()
+                        Empresa e = new Empresa()
                         {
                             UserId = user.Id
                         };
-                        Context.Empresas.Add(d);
+                        Context.Empresas.Add(e);
+                        Context.SaveChanges();
+                        Session.Set("UserId", e.EmpresaId);
                     }
 
-                    Context.SaveChanges();
+                    //Context.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

@@ -49,26 +49,46 @@ namespace WebApplication1.Controllers
 
         public ActionResult ConsultarPreferencias()
         {
-            string email = Session.Get<string>("ContaCorrente");
-            var conta = db.Alunos.Where(x => x.Nome == email).FirstOrDefault();
+            int alunoId = Session.Get<int>("UserId");
 
-            return View(conta.Preferencias.ToList());
+            var query = from p in db.Propostas
+                        from a in p.Alunos
+                        where a.AlunoId == alunoId
+                        select p;
+
+            return View(query.ToList());
         }
 
         public ActionResult Candidatura(int? id)
         {
-            string email = Session.Get<string>("ContaCorrente");
-            var aluno = db.Alunos.Where(x => x.Nome == email).FirstOrDefault();
+            int alunoId = Session.Get<int>("UserId");
+
+            var aluno = db.Alunos.Where(x => x.AlunoId == alunoId).FirstOrDefault();
             var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
 
-            if (email != null && aluno != null)
+            if (aluno != null && proposta != null)
             {
                 aluno.Preferencias.Add(proposta);
                 db.SaveChanges();
-                return RedirectToAction("ConsultarPreferencias");
+                return RedirectToAction("ListarPropostas", "Propostas");
             }
 
-            //Session.Set("ContaCorrente", );
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult RemoverCandidatura(int? id)
+        {
+            int alunoId = Session.Get<int>("UserId");
+
+            var aluno = db.Alunos.Where(x => x.AlunoId == alunoId).FirstOrDefault();
+            var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
+
+            if (aluno != null && proposta != null)
+            {
+                aluno.Preferencias.Remove(proposta);
+                db.SaveChanges();
+                return RedirectToAction("ListarPropostas", "Propostas");
+            }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
