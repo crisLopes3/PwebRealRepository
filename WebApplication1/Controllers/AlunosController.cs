@@ -51,6 +51,10 @@ namespace WebApplication1.Controllers
         {
             int alunoId = Session.Get<int>("UserId");
 
+
+            //var asda = db.Alunos.Where(x=>x.AlunoId == alunoId).FirstOrDefault().Preferencias.
+
+
             var query = from p in db.Propostas
                         from a in p.Alunos
                         where a.AlunoId == alunoId

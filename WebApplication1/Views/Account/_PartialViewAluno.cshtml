@@ -1,10 +1,20 @@
-﻿@model WebApplication1.Models.RegisterViewModel
-
-
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    <div class="nav navbar-nav navbar-right">
-        Introduzir Dados Do Aluno
+﻿
+<div class="form-group">
+    @Html.Label("DisciplinasPorFazer", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBox("DisciplinasPorFazer", null, new { @class = "form-control" })
     </div>
-}
+</div>
+<div class="form-group">
+    @Html.Label("DisciplinasFeitas", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBox("DisciplinasFeitas", null, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.Label("Ramos", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.DropDownList("Ramos", (SelectList)ViewBag.Ramos,"Ramo", new { @class = "form-control" })
+    </div>
+</div>
+

@@ -23,7 +23,6 @@ namespace WebApplication1.Controllers
                 ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
             }
 
-
             ViewBag.TiposOrdenacao = new SelectList( new List<Object>{
                        new { value = 0 , text = "Ramo"  },
                        new { value = 1 , text = "Local de Estágio" },

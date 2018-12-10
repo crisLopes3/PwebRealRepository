@@ -87,8 +87,8 @@ namespace WebApplication1.Controllers
                 case SignInStatus.Success:
                     var userId = UserManager.Find(model.Email, model.Password).Id;
 
-                    int utilizadorId =  Context.Alunos.Where(x => x.UserId == userId).Select(x => x.AlunoId).FirstOrDefault();
-                    if(utilizadorId == 0)
+                    int utilizadorId = Context.Alunos.Where(x => x.UserId == userId).Select(x => x.AlunoId).FirstOrDefault();
+                    if (utilizadorId == 0)
                         utilizadorId = Context.Empresas.Where(x => x.UserId == userId).Select(x => x.EmpresaId).FirstOrDefault();
                     if (utilizadorId == 0)
                         utilizadorId = Context.Docentes.Where(x => x.UserId == userId).Select(x => x.DocenteId).FirstOrDefault();
@@ -156,6 +156,13 @@ namespace WebApplication1.Controllers
         {
             ViewBag.Perfis = new SelectList(Context.Roles.Where(x => !x.Name.Contains("Admin")).ToList(), "Name", "Name");
 
+            ViewBag.Ramos = new SelectList(new List<Object>{
+                       new { value = 0 , text = "Sistemas de Informação"},
+                       new { value = 1 , text = "Desenvolvimento de Aplicações"},
+                       new { value = 2 , text = "Redes e Administração de Sistemas"}
+                    }, "value", "text", 3);
+
+
             return View();
         }
 
@@ -164,7 +171,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string DisciplinasPorFazer, string DisciplinasFeitas, string Ramos)
         {
             if (ModelState.IsValid)
             {
@@ -175,16 +182,31 @@ namespace WebApplication1.Controllers
                     await UserManager.AddToRoleAsync(user.Id, model.UserRoles); //associa perfil ao utilizador
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    //Session.Set("UserId", user.Id);
-
                     if (model.UserRoles == "Aluno")
                     {
+                        Ramo r;
+                        switch (Ramos)
+                        {
+                            case "0":
+                                r = Ramo.SistemasDeInformacao;
+                                break;
+                            case "1":
+                                r = Ramo.DesenvolvimentoAplicacoes;
+                                break;
+                            case "2":
+                                r = Ramo.RedesEAdministracaoDeSistemas;
+                                break;
+                            default:
+                                r = Ramo.SistemasDeInformacao;
+                                break;
+                        }
                         Aluno a = new Aluno()
                         {
                             Nome = model.Email,
-                            Ramo = Ramo.DesenvolvimentoAplicacoes,
-                            DisciplinasFeitas = "dsa",
-                            DisciplinasPorFazer = "dsa",
+
+                            Ramo = r,
+                            DisciplinasPorFazer = DisciplinasPorFazer,
+                            DisciplinasFeitas = DisciplinasFeitas,
                             UserId = user.Id
                         };
                         Context.Alunos.Add(a);
@@ -202,7 +224,6 @@ namespace WebApplication1.Controllers
                         Context.SaveChanges();
                         Session.Set("UserId", d.DocenteId);
                     }
-
                     if (model.UserRoles == "Empresa")
                     {
                         Empresa e = new Empresa()

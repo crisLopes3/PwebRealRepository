@@ -98,11 +98,12 @@
 </table>
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
+   @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(function () {
-            $("#Ordenar").on("change", function (event){
+            $("#Ordenar").on("change", function (event) {
+
                 var value = $(this).val();
                 if (value === '0') {
                     location.href = '@Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 0})'
