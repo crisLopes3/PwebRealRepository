@@ -226,6 +226,7 @@
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Mensagem.cs" />
     <Compile Include="Models\Proposta.cs" />
     <Compile Include="Models\Ramo.cs" />
     <Compile Include="Models\TipoProposta.cs" />

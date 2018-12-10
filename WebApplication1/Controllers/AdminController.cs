@@ -28,12 +28,16 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult RetirarDaComissao(int? id)
+        public ActionResult RetirarDaComissaoAsync(int? id)
         {
             var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
-
+             
             if (docente != null)
             {
+
+                //ApplicationUserManager a = null;
+                //await a.AddToRoleAsync(docente.UserId, "Comissao");
+
                 docente.PertenceComissao = false;
                 db.SaveChanges();
             }

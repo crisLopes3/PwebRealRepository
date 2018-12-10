@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     @*@if (User.Identity.IsAuthenticated)
         {*@
-                    <li>@Html.ActionLink("Consultar Propostas-Pweb", "ListarPropostas", "Propostas")</li>
+                    <li>@Html.ActionLink("Consultar Propostas", "ListarPropostas", "Propostas")</li>
                     @*  *@}
 
                     @if (User.IsInRole("Admin"))

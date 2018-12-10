@@ -179,6 +179,7 @@ namespace WebApplication1.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
                     await UserManager.AddToRoleAsync(user.Id, model.UserRoles); //associa perfil ao utilizador
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
