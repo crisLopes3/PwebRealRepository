@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     @*@if (User.Identity.IsAuthenticated)
         {*@
-                    <li>@Html.ActionLink("Consultar Propostas", "ListarPropostas", "Propostas")</li>
+                    <li>@Html.ActionLink("Consultar Propostas-Pweb", "ListarPropostas", "Propostas")</li>
                     @*  *@}
 
                     @if (User.IsInRole("Admin"))
@@ -38,6 +38,7 @@
                                 <li>@Html.ActionLink("Alunos", "ListarAlunos", "Admin")</li>
                                 <li>@Html.ActionLink("Docentes", "ListarDocentes", "Admin")</li>
                                 <li>@Html.ActionLink("Empresas", "ListarEmpresas", "Admin")</li>
+
                             </ul>
                         </li>
                         <li>@Html.ActionLink("Comissão", "ListarComissao", "Admin")</li>
