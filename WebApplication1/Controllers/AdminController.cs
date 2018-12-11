@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,6 +15,8 @@ namespace WebApplication1.Controllers
     public class AdminController : Controller
     {
         private Context db = new Context();
+        ApplicationDbContext context = new ApplicationDbContext();
+
 
         public ActionResult ListarAlunos()
         {
@@ -31,7 +35,7 @@ namespace WebApplication1.Controllers
         public ActionResult RetirarDaComissao(int? id)
         {
             var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
-             
+
             if (docente != null)
             {
 
@@ -51,6 +55,9 @@ namespace WebApplication1.Controllers
 
             if (docente != null)
             {
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                UserManager.AddToRole(docente.UserId, "Comissao");
+              
                 docente.PertenceComissao = true;
                 db.SaveChanges();
             }
@@ -60,7 +67,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult ListarComissao()
         {
-            return View(db.Docentes.Where(x=>x.PertenceComissao == true).ToList());
+            return View(db.Docentes.Where(x => x.PertenceComissao == true).ToList());
         }
     }
 }

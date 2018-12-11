@@ -22,6 +22,7 @@ namespace WebApplication1.Models
         public Docente DocenteRecetor { get; set; }
         public Empresa EmpresaRecetor { get; set; }
 
+
         public Mensagem()
         {
             Data = DateTime.Now;

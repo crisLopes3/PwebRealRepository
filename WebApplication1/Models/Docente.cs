@@ -22,6 +22,10 @@ namespace WebApplication1.Models
         public ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<Proposta> Propostas { get; set; }
+        //public virtual ICollection<Proposta> ProstasParaOrientar { get; set; }; // propostas que ele pode rejeitar e aceitar ser orientador propostas por outros docentes
+
+        //public virtual ICollection<Mensagem> MesagensRecebidas { get; set; }
+        //public virtual ICollection<Mensagem> MesagensEnviadas { get; set; }
 
         public Docente()
         {

@@ -26,6 +26,8 @@ namespace WebApplication1.Models
         [Required]
         public string DisciplinasFeitas { get; set; }
 
+        //public int? NotaAtribuida { get; set; }
+
 
         //public string DisciplinasFeitas_teste { get; set; }
 
@@ -43,6 +45,10 @@ namespace WebApplication1.Models
 
         //[InverseProperty("AlunoAtribuido")]
         public virtual ICollection<Proposta> Preferencias { get; set; }
+
+        //public virtual ICollection<Mensagem> MesagensRecebidas { get; set; }
+        //public virtual ICollection<Mensagem> MesagensEnviadas { get; set; }
+
 
 
         public Aluno()

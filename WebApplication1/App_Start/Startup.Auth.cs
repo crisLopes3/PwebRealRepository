@@ -109,6 +109,12 @@ namespace WebApplication1
                 var role = new IdentityRole { Name = "Empresa" };
                 RoleManager.Create(role);
             }
+            if (!RoleManager.RoleExists("Comissao"))
+            {
+                var role = new IdentityRole { Name = "Comissao" };
+                RoleManager.Create(role);
+            }
+
         }
     }
 }

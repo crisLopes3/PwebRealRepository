@@ -154,7 +154,7 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Perfis = new SelectList(Context.Roles.Where(x => !x.Name.Contains("Admin")).ToList(), "Name", "Name");
+            ViewBag.Perfis = new SelectList(Context.Roles.Where(x => !x.Name.Contains("Admin") && !x.Name.Contains("Comissao")).ToList(), "Name", "Name");
 
             ViewBag.Ramos = new SelectList(new List<Object>{
                        new { value = 0 , text = "Sistemas de Informação"},

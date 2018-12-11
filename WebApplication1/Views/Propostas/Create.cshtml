@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Proposta</h4>
         <hr />
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TipoProposta, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TipoProposta, htmlAttributes: new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.TipoProposta,"Tipo", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TipoProposta, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,14 +70,18 @@
                 @Html.ValidationMessageFor(model => model.Objetivos, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div id="divPartialViewProjeto">
+            @Html.Partial("_PartialViewProposta")
+        </div>
+
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.AlunoId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AlunoId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AlunoId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.AlunoId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AlunoId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AlunoId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -93,4 +97,25 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#divPartialViewProjeto").hide();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#TipoProposta").on("change", function (event) {
+                var value = $(this).val();
+                alert(value);
+                if (value === '1') {
+                    $("#divPartialViewProjeto").show();
+                } else {
+                    $("#divPartialViewProjeto").hide();
+                }  
+            });
+        });
+    </script>
 }
+
