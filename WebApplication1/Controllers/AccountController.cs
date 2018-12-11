@@ -219,6 +219,7 @@ namespace WebApplication1.Controllers
                     {
                         Docente d = new Docente()
                         {
+                            Nome = model.Email,
                             UserId = user.Id
                         };
                         Context.Docentes.Add(d);
@@ -229,6 +230,7 @@ namespace WebApplication1.Controllers
                     {
                         Empresa e = new Empresa()
                         {
+                            Nome = model.Email,
                             UserId = user.Id
                         };
                         Context.Empresas.Add(e);

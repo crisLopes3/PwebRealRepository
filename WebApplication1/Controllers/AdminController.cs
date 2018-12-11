@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult RetirarDaComissaoAsync(int? id)
+        public ActionResult RetirarDaComissao(int? id)
         {
             var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
              

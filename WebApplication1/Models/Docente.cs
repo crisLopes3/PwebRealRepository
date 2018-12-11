@@ -12,6 +12,9 @@ namespace WebApplication1.Models
     {
         public int DocenteId { get; set; }
 
+        [Required]
+        public string Nome { get; set; }
+
         public bool PertenceComissao  { get; set; }
 
         [ForeignKey("ApplicationUser")]
