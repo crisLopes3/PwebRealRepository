@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "AtribuirPropostas";
+}
+
+<h2>AtribuirPropostas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoProposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Ver Candidatos", "VerCandidatos", new { idProposta = item.PropostaId })
+        </td>
+    </tr>
+}
+
+</table>

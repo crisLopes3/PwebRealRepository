@@ -17,40 +17,46 @@ namespace WebApplication1.Controllers
         // GET: Propostas
         public ActionResult ListarPropostas(int? tipoOrdenacao)
         {
-            if(User.IsInRole("Aluno"))
+            if (User.IsInRole("Aluno"))
             {
                 int id = Session.Get<int>("UserId");
                 ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
             }
 
-            ViewBag.TiposOrdenacao = new SelectList( new List<Object>{
+            ViewBag.TiposOrdenacao = new SelectList(new List<Object>{
                        new { value = 0 , text = "Ramo"  },
                        new { value = 1 , text = "Local de Estágio" },
-                    },"value","text", 2);
+                    }, "value", "text", 2);
 
             ViewBag.TiposProposta = new SelectList(new List<Object>{
                        new { value = 0 , text = "Ramo"  },
                        new { value = 1 , text = "Local de Estágio" },
                     }, "value", "text", 2);
 
-
-            if (tipoOrdenacao == 1)
-                return View(db.Propostas.OrderBy(x=>x.LocalEstagio));
-            if (tipoOrdenacao == 0)
-                return View(db.Propostas.OrderBy(x => x.Ramo));
-
-
-
-            return View(db.Propostas.ToList());
+            if (User.IsInRole("Comissao"))
+            {
+                if (tipoOrdenacao == 1)
+                    return View(db.Propostas.OrderBy(x => x.LocalEstagio));
+                if (tipoOrdenacao == 0)
+                    return View(db.Propostas.OrderBy(x => x.Ramo));
+                return View(db.Propostas.ToList());
+            }
+            else
+            {
+                if (tipoOrdenacao == 1)
+                    return View(db.Propostas.Where(x => x.Estado == true).OrderBy(x => x.LocalEstagio));
+                if (tipoOrdenacao == 0)
+                    return View(db.Propostas.Where(x => x.Estado == true).OrderBy(x => x.Ramo));
+                return View(db.Propostas.Where(x => x.Estado == true).ToList());
+            }
         }
 
-      
-       
- 
 
         // GET: Propostas/Create
         public ActionResult Create()
         {
+            ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "Nome", "DocenteId");
+
             return View();
         }
         [HttpPost]
@@ -59,11 +65,13 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                int id = Session.Get<int>("UserId");
+
+                db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasCriadas.Add(proposta);
                 db.Propostas.Add(proposta);
                 db.SaveChanges();
                 return RedirectToAction("ListarPropostas");
             }
-
             return View(proposta);
         }
 
@@ -93,38 +101,90 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostas");
         }
 
+        //public ActionResult AceitarProposta(int? id)
+        //{
+        //    var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
+
+        //    if (proposta != null)
+        //    {
+        //        proposta.Estado = true;
+        //        db.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("ListarPropostas");
+        //}
+
+        //public ActionResult RegeitarProposta(int? id)
+        //{
+        //    var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
+
+        //    if (proposta != null)
+        //    {
+        //        proposta.Estado = false;
+        //        db.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("ListarPropostas");
+        //}
+
+
         public ActionResult AceitarProposta(int? id)
         {
-            var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
-
-            if(proposta != null)
+            if (id == null)
             {
-                proposta.Estado = true;
-                db.SaveChanges();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            return RedirectToAction("ListarPropostas");
+            Proposta proposta = db.Propostas.Find(id);
+            if (proposta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proposta);
         }
 
-        public ActionResult RegeitarProposta(int? id)
+        [HttpPost]
+        public ActionResult AceitarProposta(Proposta proposta, string Justificacao)
         {
-            var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
+            var aux = db.Propostas.Where(x => x.PropostaId == proposta.PropostaId).FirstOrDefault();
 
-            if (proposta != null)
+            aux.Justificacao = string.Copy(Justificacao);
+
+            aux.Estado = true;
+            db.SaveChanges();
+            return RedirectToAction("ListarPropostas");
+
+
+        }
+        public ActionResult RecusarProposta(int? id)
+        {
+            if (id == null)
             {
-                proposta.Estado = false;
-                db.SaveChanges();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Proposta proposta = db.Propostas.Find(id);
+            if (proposta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proposta);
+        }
+        [HttpPost]
+        public ActionResult RecusarProposta(Proposta proposta, string Justificacao)
+        {
+            var aux = db.Propostas.Where(x => x.PropostaId == proposta.PropostaId).FirstOrDefault();
 
+            aux.Justificacao = string.Copy(Justificacao);
+
+            aux.Estado = false;
+            db.SaveChanges();
             return RedirectToAction("ListarPropostas");
         }
 
-       
 
 
 
         protected override void Dispose(bool disposing)
-        { 
+        {
             if (disposing)
             {
                 db.Dispose();

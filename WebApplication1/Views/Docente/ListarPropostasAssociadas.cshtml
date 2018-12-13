@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "ListarPropostasAssociadas";
+}
+
+<h2>ListarPropostasAssociado</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalEstagio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objetivos)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalEstagio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoProposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objetivos)
+        </td>
+        <td>
+            @Html.ActionLink("Sair", "SairDaProposta", new { id=item.PropostaId })
+        </td>
+    </tr>
+}
+
+</table>

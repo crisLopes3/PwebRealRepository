@@ -14,14 +14,8 @@ namespace WebApplication1.Models
         public string Corpo { get; set; }
         public DateTime Data { get; set; }
 
-        public Aluno AlunoCriador { get; set; }
-        public Docente DocenteCriador { get; set; }
-        public Empresa EmpresaCriador { get; set; }
-
-        public Aluno AlunoRecetor { get; set; }
-        public Docente DocenteRecetor { get; set; }
-        public Empresa EmpresaRecetor { get; set; }
-
+        public ApplicationUser Criador { get; set; }
+        public ApplicationUser Recetor { get; set; }
 
         public Mensagem()
         {

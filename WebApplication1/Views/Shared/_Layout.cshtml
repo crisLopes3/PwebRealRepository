@@ -55,6 +55,17 @@
                                 <li>@Html.ActionLink("Consultar Preferencias", "ConsultarPreferencias", "Alunos")</li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Nova Mensagem", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Caixa de Correio", "Index", "Home")</li>
+                            </ul>
+                        </li>
                     }
                     @if (User.IsInRole("Docente"))
                     {
@@ -65,6 +76,20 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Nova Proposta", "Create", "Propostas")</li>
+                                <li>@Html.ActionLink("Mostrar próprias propostas", "ListarPropostasCriadas", "Docente")</li>
+                                <li>@Html.ActionLink("Mostrar propostas associado", "ListarPropostasAssociadas", "Docente")</li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Nova Mensagem", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Caixa de Correio", "Index", "Home")</li>
                             </ul>
                         </li>
                     }
@@ -80,11 +105,30 @@
                                 <li>@Html.ActionLink("Avaliar Estagiários", "Index", "Home")</li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Nova Mensagem", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Caixa de Correio", "Index", "Home")</li>
+                            </ul>
+                        </li>
                     }
 
                     @if (User.IsInRole("Comissao"))
                     {
-                        <li>@Html.ActionLink("COmissaosoaso", "Index", "Home")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Comissão
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Atribuir Propostas", "AtribuirPropostas", "Docente")</li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

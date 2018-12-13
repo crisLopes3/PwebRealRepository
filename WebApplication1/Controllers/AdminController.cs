@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
     public class AdminController : Controller
     {
         private Context db = new Context();
-        ApplicationDbContext context = new ApplicationDbContext();
+        private ApplicationDbContext context = new ApplicationDbContext();
 
 
         public ActionResult ListarAlunos()

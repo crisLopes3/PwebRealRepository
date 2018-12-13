@@ -21,15 +21,16 @@ namespace WebApplication1.Models
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        public virtual ICollection<Proposta> Propostas { get; set; }
-        //public virtual ICollection<Proposta> ProstasParaOrientar { get; set; }; // propostas que ele pode rejeitar e aceitar ser orientador propostas por outros docentes
+        [InverseProperty("DocenteCriador")]
+        public virtual ICollection<Proposta> PropostasCriadas { get; set; } // propostas que ele pode rejeitar e aceitar ser orientador propostas por outros docentes
+        [InverseProperty("DocentesAtribuidos")]
+        public virtual ICollection<Proposta> PropostasAssociadas { get; set; }
 
-        //public virtual ICollection<Mensagem> MesagensRecebidas { get; set; }
-        //public virtual ICollection<Mensagem> MesagensEnviadas { get; set; }
 
         public Docente()
         {
-            Propostas = new HashSet<Proposta>();
+            PropostasCriadas = new HashSet<Proposta>();
+            PropostasAssociadas = new HashSet<Proposta>();
         }
     }
 }

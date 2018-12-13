@@ -9,7 +9,6 @@ namespace WebApplication1.Models
 {
     public class Proposta
     {
-        //[ForeignKey("AlunoAtribuido")]
         public int PropostaId { get; set; }
 
         [Required]
@@ -26,6 +25,8 @@ namespace WebApplication1.Models
 
         public bool Estado { get; set; }
 
+        public string Justificacao { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataInicio { get; set; }
@@ -37,27 +38,22 @@ namespace WebApplication1.Models
         [DataType(DataType.MultilineText)]
         public string Objetivos { get; set; }
 
-        //public int? AlunoId { get; set; }
-        //[ForeignKey("AlunoPropostaAtribuida")]
-        //public int? AlunoPropostaAtribuidaId { get; set; }
+      
         public virtual Aluno PropostaAlunoAtribuido { get; set; }
-        //[InverseProperty("Aluno")]
-        //public virtual ICollection<Aluno> AlunoAtribuidos { get; set; }
-
-
         [InverseProperty("Preferencias")]
         public virtual ICollection<Aluno> Alunos { get; set; }
-        public virtual ICollection<Docente> Docentes { get; set; }
-        public virtual ICollection<Empresa> Empresas { get; set; }
 
-        ///////////////////////AVALIACOES   
-        //public ICollection<Avaliacao> Avaliacoes { get; set; }
+
+        public virtual Empresa EmpresaCriador { get; set; }
+
+        public virtual Docente DocenteCriador { get; set; }
+        public virtual ICollection<Docente> DocentesAtribuidos { get; set; }
+        
 
         public Proposta()
         {
             Alunos = new HashSet<Aluno>();
-            Docentes = new HashSet<Docente>();
-            Empresas = new HashSet<Empresa>();
+            DocentesAtribuidos = new HashSet<Docente>();
         }
     }
 }

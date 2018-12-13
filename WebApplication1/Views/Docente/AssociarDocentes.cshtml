@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication1.Models.Docente>
+
+@{
+    ViewBag.Title = "AssociarDocentes";
+}
+
+<h2>AssociarDocentes</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+
+
+
+        @if (!ViewBag.DocentesAssociados.Contains(item.DocenteId))
+        {
+            <td>
+                @Html.ActionLink("Associar", "Associar", new { id = item.DocenteId })
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Desassociar", "Desassociar", new { id = item.DocenteId })
+            </td>
+        }
+
+
+    </tr>
+    }
+
+</table>

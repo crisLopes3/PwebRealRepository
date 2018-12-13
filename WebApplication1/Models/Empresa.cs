@@ -15,19 +15,19 @@ namespace WebApplication1.Models
         [Required]
         public string Nome { get; set; }
 
-        //public int? NotaAtribuida { get; set; }
+        public int? NotaAtribuida { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        public virtual ICollection<Proposta> Propostas { get; set; }
-        //public virtual ICollection<Mensagem> MesagensRecebidas { get; set; }
-        //public virtual ICollection<Mensagem> MesagensEnviadas { get; set; }
+        public virtual ICollection<Proposta> PropostasCriadas { get; set; }
+
+
 
         public Empresa()
         {
-            Propostas = new HashSet<Proposta>();
+            PropostasCriadas = new HashSet<Proposta>();
         }
     }
 }

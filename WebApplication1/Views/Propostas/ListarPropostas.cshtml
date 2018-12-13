@@ -86,11 +86,23 @@
                        new { onclick = "return confirm ('Deseja remover a candidatura a"+item.Descricao+ "?');" })
                     }
                 }
-                else if (User.IsInRole("Docente"))
+                else if (User.IsInRole("Comissao"))
                 {
-                    @Html.ActionLink("Aceitar", "AceitarProposta", new { id = item.PropostaId })
-                    @Html.ActionLink("Regeitar", "RegeitarProposta", new { id = item.PropostaId })
+                    if (item.Estado && item.Alunos.ToList().Count == 0)
+                    {
+
+                        @Html.ActionLink("Regeitar", "RecusarProposta", new { id = item.PropostaId })
+                    }
+                    else if (!item.Estado)
+                    {
+                        @Html.ActionLink("Aceitar", "AceitarProposta", new { id = item.PropostaId })
+                    }
+                    else
+                    {
+                        @Html.Label("Játem candidatos") 
+                    }
                 }
+
             </td>
         </tr>
     }

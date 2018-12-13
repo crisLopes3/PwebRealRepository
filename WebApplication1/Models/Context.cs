@@ -16,6 +16,8 @@ namespace WebApplication1.Models
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Docente> Docentes { get; set; }
         public DbSet<Proposta> Propostas { get; set; }
+        public DbSet<Mensagem> Mensagens { get; set; }
+
 
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -44,5 +46,10 @@ namespace WebApplication1.Models
                 .WithOptionalPrincipal(p => p.PropostaAlunoAtribuido);
 
         }
+
+
+
+      
+
     }
 }

@@ -26,33 +26,19 @@ namespace WebApplication1.Models
         [Required]
         public string DisciplinasFeitas { get; set; }
 
-        //public int? NotaAtribuida { get; set; }
+        public int? NotaAtribuida { get; set; }
 
-
-        //public string DisciplinasFeitas_teste { get; set; }
-
-        //[ForeignKey("PropostaId")]
-        //public virtual Proposta AlunoPropostaAtribuida { get; set; }
-        //[InverseProperty("Proposta")]
-        //public virtual ICollection<Proposta> PropostaAtribuidas { get; set; }
-        //[ForeignKey("AlunoPropostaAtribuida")]
-        //public int? AlunoPropostaAtribuidaId { get; set; }
-        public virtual Proposta AlunoPropostaAtribuida { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        //[InverseProperty("AlunoAtribuido")]
+        public virtual Proposta AlunoPropostaAtribuida { get; set; }
         public virtual ICollection<Proposta> Preferencias { get; set; }
-
-        //public virtual ICollection<Mensagem> MesagensRecebidas { get; set; }
-        //public virtual ICollection<Mensagem> MesagensEnviadas { get; set; }
-
 
 
         public Aluno()
-        {
+        {   
             Preferencias = new HashSet<Proposta>();
         }
     }

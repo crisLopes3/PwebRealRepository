@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropostasController.cs" />
@@ -205,21 +206,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812082242377_m1.cs" />
-    <Compile Include="Migrations\201812082242377_m1.Designer.cs">
-      <DependentUpon>201812082242377_m1.cs</DependentUpon>
+    <Compile Include="Migrations\201812121038021_m.cs" />
+    <Compile Include="Migrations\201812121038021_m.Designer.cs">
+      <DependentUpon>201812121038021_m.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812082253122_m2.cs" />
-    <Compile Include="Migrations\201812082253122_m2.Designer.cs">
-      <DependentUpon>201812082253122_m2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812082255479_m3.cs" />
-    <Compile Include="Migrations\201812082255479_m3.Designer.cs">
-      <DependentUpon>201812082255479_m3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812102216367_m6.cs" />
-    <Compile Include="Migrations\201812102216367_m6.Designer.cs">
-      <DependentUpon>201812102216367_m6.cs</DependentUpon>
+    <Compile Include="Migrations\201812131212374_m2.cs" />
+    <Compile Include="Migrations\201812131212374_m2.Designer.cs">
+      <DependentUpon>201812131212374_m2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -238,10 +231,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BD.mdf" />
-    <Content Include="App_Data\BD_log.ldf">
-      <DependentUpon>BD.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -310,7 +299,13 @@
     <Content Include="Views\Admin\ListarDocentes.cshtml" />
     <Content Include="Views\Account\_PartialViewAluno.cshtml" />
     <Content Include="Views\Admin\ListarComissao.cshtml" />
-    <Content Include="Views\Propostas\_PartialViewProposta.cshtml" />
+    <Content Include="Views\Docente\AssociarDocentes.cshtml" />
+    <Content Include="Views\Docente\ListarPropostasCriadas.cshtml" />
+    <Content Include="Views\Docente\ListarPropostasAssociadas.cshtml" />
+    <Content Include="Views\Docente\AtribuirPropostas.cshtml" />
+    <Content Include="Views\Docente\VerCandidatos.cshtml" />
+    <Content Include="Views\Propostas\AceitarProposta.cshtml" />
+    <Content Include="Views\Propostas\RecusarProposta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -325,19 +320,15 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812082242377_m1.resx">
-      <DependentUpon>201812082242377_m1.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812121038021_m.resx">
+      <DependentUpon>201812121038021_m.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812082253122_m2.resx">
-      <DependentUpon>201812082253122_m2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812082255479_m3.resx">
-      <DependentUpon>201812082255479_m3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812102216367_m6.resx">
-      <DependentUpon>201812102216367_m6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812131212374_m2.resx">
+      <DependentUpon>201812131212374_m2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
