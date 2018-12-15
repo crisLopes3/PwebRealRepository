@@ -55,13 +55,12 @@ namespace WebApplication1.Controllers
         // GET: Propostas/Create
         public ActionResult Create()
         {
-            ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "Nome", "DocenteId");
-
+            ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "DocenteId", "Nome");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta)
+        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta, string docentesAssociados)
         {
             if (ModelState.IsValid)
             {
@@ -100,33 +99,6 @@ namespace WebApplication1.Controllers
             db.SaveChanges();
             return RedirectToAction("ListarPropostas");
         }
-
-        //public ActionResult AceitarProposta(int? id)
-        //{
-        //    var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
-
-        //    if (proposta != null)
-        //    {
-        //        proposta.Estado = true;
-        //        db.SaveChanges();
-        //    }
-
-        //    return RedirectToAction("ListarPropostas");
-        //}
-
-        //public ActionResult RegeitarProposta(int? id)
-        //{
-        //    var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
-
-        //    if (proposta != null)
-        //    {
-        //        proposta.Estado = false;
-        //        db.SaveChanges();
-        //    }
-
-        //    return RedirectToAction("ListarPropostas");
-        //}
-
 
         public ActionResult AceitarProposta(int? id)
         {
