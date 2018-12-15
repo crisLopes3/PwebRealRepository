@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.Mensagem
+
+@{
+    ViewBag.Title = "DetalhesMensagem";
+}
+
+<h2>DetalhesMensagem</h2>
+
+<div>
+    <h4>Mensagem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destinatario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destinatario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Remetente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remetente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assunto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Corpo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Corpo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MensagemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Mensagem>
+
+@{
+    ViewBag.Title = "ListaMensagensRecebidas";
+}
+
+<h2>ListaMensagensRecebidas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Remetente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remetente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.ActionLink("Visualizar", "DetalhesMensagem", new { id=item.MensagemId }) 
+            @*@Html.ActionLink("Details", "Details", new { id=item.MensagemId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MensagemId })*@
+        </td>
+    </tr>
+}
+
+</table>

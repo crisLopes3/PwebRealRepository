@@ -190,9 +190,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -200,6 +203,7 @@
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MensagemController.cs" />
     <Compile Include="Controllers\PropostasController.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
@@ -213,6 +217,14 @@
     <Compile Include="Migrations\201812131212374_m2.cs" />
     <Compile Include="Migrations\201812131212374_m2.Designer.cs">
       <DependentUpon>201812131212374_m2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812151438073_m5.cs" />
+    <Compile Include="Migrations\201812151438073_m5.Designer.cs">
+      <DependentUpon>201812151438073_m5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812151517264_m6.cs" />
+    <Compile Include="Migrations\201812151517264_m6.Designer.cs">
+      <DependentUpon>201812151517264_m6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -231,6 +243,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\BD.mdf" />
+    <Content Include="App_Data\BD_log.ldf">
+      <DependentUpon>BD.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -306,6 +322,10 @@
     <Content Include="Views\Docente\VerCandidatos.cshtml" />
     <Content Include="Views\Propostas\AceitarProposta.cshtml" />
     <Content Include="Views\Propostas\RecusarProposta.cshtml" />
+    <Content Include="Views\Mensagem\NovaMensagem.cshtml" />
+    <Content Include="Views\Mensagem\ListaMensagensEnviadas.cshtml" />
+    <Content Include="Views\Mensagem\ListaMensagensRecebidas.cshtml" />
+    <Content Include="Views\Mensagem\DetalhesMensagem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -320,15 +340,19 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812121038021_m.resx">
       <DependentUpon>201812121038021_m.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812131212374_m2.resx">
       <DependentUpon>201812131212374_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812151438073_m5.resx">
+      <DependentUpon>201812151438073_m5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812151517264_m6.resx">
+      <DependentUpon>201812151517264_m6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
