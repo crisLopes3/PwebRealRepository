@@ -18,26 +18,6 @@ namespace WebApplication1.Models
         public DbSet<Proposta> Propostas { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
 
-
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<Aluno>().HasMany<Proposta>(p => p.Preferencias)
-        //        .WithMany(a => a.Alunos)
-        //        .Map(cs =>
-        //        {
-        //            cs.MapLeftKey("AlunoId").MapRightKey("PropostaId").ToTable("AlunosPropostas");
-        //        });
-        //}
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<Aluno>().HasOptional(a => a.PropostaAtribuida).
-        //        WithRequired(p => p.AlunoAtribuido);
-        //}
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -46,10 +26,6 @@ namespace WebApplication1.Models
                 .WithOptionalPrincipal(p => p.PropostaAlunoAtribuido);
 
         }
-
-
-
-      
 
     }
 }

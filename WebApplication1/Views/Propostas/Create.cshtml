@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TipoProposta, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TipoProposta,"Tipo", htmlAttributes: new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.TipoProposta, "Tipo", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TipoProposta, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,18 +70,35 @@
                 @Html.ValidationMessageFor(model => model.Objetivos, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @foreach (var item in ViewBag.Docentes)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               name="AssociarDocentes"
+                               value="item.Value" /> @item.Text | @item.Value
+                        </label>
+                    </div>
+                }
+        </div>
+
+        @Html.Hidden("docentesAssociados", "ola");
+
+
         <div id="divPartialViewProjeto">
             @*@Html.Partial("_PartialViewProp")*@
-            @Html.DropDownList("Docentes", (SelectList)ViewBag.Docentes, "select")
+            @*@Html.DropDownList("Docentes", (SelectList)ViewBag.Docentes, "select")*@
 
             <div class="form-group">
                 @Html.Label("AdicinarDocentes", new { @class = "col-md-2 control-label" })
                 @*<div class="col-md-10">
-                    @foreach (var item in Model.Docentes)
-                    {
-                        @Html.Label(item.Nome, new { @class = "col-md-2 control-label" })
-                    }
-                </div>*@
+                        @foreach (var item in Model.Docentes)
+                        {
+                            @Html.Label(item.Nome, new { @class = "col-md-2 control-label" })
+                        }
+                    </div>*@
             </div>
         </div>
         <div class="form-group">
@@ -98,24 +115,15 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        $(function () {
-            $("#divPartialViewProjeto").hide();
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            $("#TipoProposta").on("change", function (event) {
-                var value = $(this).val();
-                alert(value);
-                if (value === '1') {
-                    $("#divPartialViewProjeto").show();
-                } else {
-                    $("#divPartialViewProjeto").hide();
-                }  
-            });
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        $('[name="AssociarDocentes"]').click(function () {
+            // code here.
+            var hv = $("#docentesAssociados").val() ;
+            alert(hv);
+            alert($(this).val());
+    });
+ });
+</script>
 }
 
