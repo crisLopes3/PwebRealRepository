@@ -91,7 +91,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult AtribuirPropostas()
         {
-            return View(db.Propostas.Where(x=>x.Estado == true).ToList());
+            return View(db.Propostas.Where(x=>x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
         }
 
         public ActionResult VerCandidatos(int? idProposta)
@@ -99,7 +99,7 @@ namespace WebApplication1.Controllers
             if(idProposta > 0)
             {
                 var proposta = db.Propostas.Where(x => x.PropostaId == idProposta).FirstOrDefault();
-                ViewBag.Proposta = proposta;
+                ViewBag.PropostaId = proposta.PropostaId;
                 return View(proposta.Alunos.ToList());
             }
             return RedirectToAction("AtribuirPropostas");
@@ -116,6 +116,11 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult PropostasAtribuidas()
+        {
+            return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).ToList());
         }
     }
 }

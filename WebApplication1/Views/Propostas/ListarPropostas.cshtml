@@ -10,7 +10,7 @@
     <tr>
         <th>
             @*@Html.DropDownList("Ordenar", ((SelectList)ViewBag.TiposOrdenacao),"Ordenar",
-           new { onchange = "location.href='" + @Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 1}) + "'" })*@
+                new { onchange = "location.href='" + @Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 1}) + "'" })*@
             @Html.DropDownList("Ordenar", ((SelectList)ViewBag.TiposOrdenacao), "Ordenar")
         </th>
     </tr>
@@ -100,8 +100,9 @@
                     }
                     else
                     {
-                        @Html.ActionLink("Atribuir Proposta", "AtribuirProposta","Comisao", new { id = item.PropostaId },null)
+                        @*@Html.ActionLink("Atribuir Proposta", "AtribuirProposta", "Comisao", new { id = item.PropostaId }, null)*@
                     }
+
                 }
 
             </td>
@@ -111,12 +112,12 @@
 </table>
 
 @section Scripts {
-   @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(function () {
             $("#Ordenar").on("change", function (event) {
-                
+
                 var value = $(this).val();
                 alert(value);
                 if (value === '0') {

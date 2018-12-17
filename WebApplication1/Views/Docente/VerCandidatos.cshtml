@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.DisciplinasFeitas)
         </td>
         <td>
-            @Html.ActionLink("Atribuir Estágio", "AtribuirAluno", new {idProposta = ViewBag.Proposta.PropostaId,idAluno = item.AlunoId })
+            @Html.ActionLink("Atribuir Estágio", "AtribuirAluno", new {idProposta = ViewBag.PropostaId ,idAluno = item.AlunoId })
         </td>
     </tr>
 }
