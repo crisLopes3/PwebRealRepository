@@ -46,6 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -210,21 +213,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812121038021_m.cs" />
-    <Compile Include="Migrations\201812121038021_m.Designer.cs">
-      <DependentUpon>201812121038021_m.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812131212374_m2.cs" />
-    <Compile Include="Migrations\201812131212374_m2.Designer.cs">
-      <DependentUpon>201812131212374_m2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812151438073_m5.cs" />
-    <Compile Include="Migrations\201812151438073_m5.Designer.cs">
-      <DependentUpon>201812151438073_m5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812151517264_m6.cs" />
-    <Compile Include="Migrations\201812151517264_m6.Designer.cs">
-      <DependentUpon>201812151517264_m6.cs</DependentUpon>
+    <Compile Include="Migrations\201812152242032_m.cs" />
+    <Compile Include="Migrations\201812152242032_m.Designer.cs">
+      <DependentUpon>201812152242032_m.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -243,10 +234,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BD.mdf" />
-    <Content Include="App_Data\BD_log.ldf">
-      <DependentUpon>BD.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -340,19 +327,12 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812121038021_m.resx">
-      <DependentUpon>201812121038021_m.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812131212374_m2.resx">
-      <DependentUpon>201812131212374_m2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812151438073_m5.resx">
-      <DependentUpon>201812151438073_m5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812151517264_m6.resx">
-      <DependentUpon>201812151517264_m6.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812152242032_m.resx">
+      <DependentUpon>201812152242032_m.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

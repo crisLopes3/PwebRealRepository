@@ -72,9 +72,10 @@
         </div>
 
         <div class="form-group">
+          
             @foreach (var item in ViewBag.Docentes)
             {
-                <div class="checkbox">
+                <div class="checkbox" >
                     <label>
                         <input type="checkbox"
                                name="AssociarDocentes"
@@ -86,21 +87,11 @@
 
         @Html.Hidden("docentesAssociados", "ola");
 
+        @*<div class="form-group">
+            @Html.CheckBoxListFor(model => model.PostedDocentes, model => model.DocentesAtribuidos, x => x.DocenteId, x => x.Nome, model => model.PostedDocentes)
+        </div>*@
 
-        <div id="divPartialViewProjeto">
-            @*@Html.Partial("_PartialViewProp")*@
-            @*@Html.DropDownList("Docentes", (SelectList)ViewBag.Docentes, "select")*@
 
-            <div class="form-group">
-                @Html.Label("AdicinarDocentes", new { @class = "col-md-2 control-label" })
-                @*<div class="col-md-10">
-                        @foreach (var item in Model.Docentes)
-                        {
-                            @Html.Label(item.Nome, new { @class = "col-md-2 control-label" })
-                        }
-                    </div>*@
-            </div>
-        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -115,15 +106,13 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script>
-    $(document).ready(function () {
-        $('[name="AssociarDocentes"]').click(function () {
-            // code here.
-            var hv = $("#docentesAssociados").val() ;
-            alert(hv);
-            alert($(this).val());
-    });
- });
-</script>
+    <script>
+        $(document).ready(function () {
+            $('[name="AssociarDocentes"]').click(function () {
+                var hv = $("#docentesAssociados").val();
+                alert(hv);
+            });
+        });
+    </script>
 }
 

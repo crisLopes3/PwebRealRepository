@@ -51,16 +51,22 @@ namespace WebApplication1.Controllers
             }
         }
 
-
         // GET: Propostas/Create
         public ActionResult Create()
         {
             ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "DocenteId", "Nome");
+
+            //int id = Session.Get<int>("UserId");
+            //ViewBag.CreatePropostaViewModel = new CreatePropostaViewModel
+            //{
+            //    Docentes = db.Docentes.Where(x => x.DocenteId != id).ToList(),
+            //};
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta, string docentesAssociados)
+        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta,string docentesAssociados)
         {
             if (ModelState.IsValid)
             {

@@ -33,6 +33,7 @@ namespace WebApplication1.Migrations
                         TipoProposta = c.Int(nullable: false),
                         Ramo = c.Int(nullable: false),
                         Estado = c.Boolean(nullable: false),
+                        Justificacao = c.String(),
                         DataInicio = c.DateTime(nullable: false),
                         DataFim = c.DateTime(nullable: false),
                         Objetivos = c.String(),
@@ -105,6 +106,25 @@ namespace WebApplication1.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Mensagems",
+                c => new
+                    {
+                        MensagemId = c.Int(nullable: false, identity: true),
+                        Destinatario = c.String(nullable: false),
+                        Remetente = c.String(),
+                        Assunto = c.String(nullable: false),
+                        Corpo = c.String(nullable: false),
+                        Data = c.DateTime(nullable: false),
+                        Criador_Id = c.String(maxLength: 128),
+                        Recetor_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.MensagemId)
+                .ForeignKey("dbo.AspNetUsers", t => t.Criador_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Recetor_Id)
+                .Index(t => t.Criador_Id)
+                .Index(t => t.Recetor_Id);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -182,6 +202,8 @@ namespace WebApplication1.Migrations
             DropForeignKey("dbo.DocentePropostas", "Docente_DocenteId", "dbo.Docentes");
             DropForeignKey("dbo.Docentes", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Mensagems", "Recetor_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Mensagems", "Criador_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.PropostaAlunoes", "Aluno_AlunoId", "dbo.Alunos");
@@ -194,6 +216,8 @@ namespace WebApplication1.Migrations
             DropIndex("dbo.Empresas", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.Mensagems", new[] { "Recetor_Id" });
+            DropIndex("dbo.Mensagems", new[] { "Criador_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -207,6 +231,7 @@ namespace WebApplication1.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Empresas");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.Mensagems");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

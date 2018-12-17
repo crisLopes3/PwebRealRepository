@@ -48,7 +48,9 @@ namespace WebApplication1.Models
 
         public virtual Docente DocenteCriador { get; set; }
         public virtual ICollection<Docente> DocentesAtribuidos { get; set; }
-        
+
+        //[NotMapped]
+        //public PostedDocentes PostedDocentes { get; set; }
 
         public Proposta()
         {
@@ -56,4 +58,11 @@ namespace WebApplication1.Models
             DocentesAtribuidos = new HashSet<Docente>();
         }
     }
+
+    //[NotMapped]
+    //public class PostedDocentes
+    //{
+    //    [NotMapped]
+    //    public string[] DocentesIds { get; set; }
+    //}
 }

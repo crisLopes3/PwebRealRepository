@@ -26,6 +26,5 @@ namespace WebApplication1.Models
                 .WithOptionalPrincipal(p => p.PropostaAlunoAtribuido);
 
         }
-
     }
 }
