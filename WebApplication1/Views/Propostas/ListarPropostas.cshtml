@@ -92,6 +92,7 @@
                     {
 
                         @Html.ActionLink("Regeitar", "RecusarProposta", new { id = item.PropostaId })
+
                     }
                     else if (!item.Estado)
                     {
@@ -99,7 +100,7 @@
                     }
                     else
                     {
-                        @Html.Label("Já tem candidatos") 
+                        @Html.ActionLink("Atribuir Proposta", "AtribuirProposta","Comisao", new { id = item.PropostaId },null)
                     }
                 }
 

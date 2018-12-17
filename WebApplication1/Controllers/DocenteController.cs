@@ -99,9 +99,23 @@ namespace WebApplication1.Controllers
             if(idProposta > 0)
             {
                 var proposta = db.Propostas.Where(x => x.PropostaId == idProposta).FirstOrDefault();
+                ViewBag.Proposta = proposta;
                 return View(proposta.Alunos.ToList());
             }
             return RedirectToAction("AtribuirPropostas");
+        }
+
+        public ActionResult AtribuirAluno(int idProposta, int idAluno)
+        {
+            var proposta = db.Propostas.Where(x => x.PropostaId == idProposta).FirstOrDefault();
+            var aluno = db.Alunos.Where(x => x.AlunoId == idAluno).FirstOrDefault();
+
+            if (aluno != null && proposta != null)
+            {
+                aluno.AlunoPropostaAtribuida = proposta;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

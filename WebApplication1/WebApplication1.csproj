@@ -328,11 +328,23 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Comisao\" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812152242032_m.resx">
-      <DependentUpon>201812152242032_m.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812121038021_m.resx">
+      <DependentUpon>201812121038021_m.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812131212374_m2.resx">
+      <DependentUpon>201812131212374_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812151438073_m5.resx">
+      <DependentUpon>201812151438073_m5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812151517264_m6.resx">
+      <DependentUpon>201812151517264_m6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
