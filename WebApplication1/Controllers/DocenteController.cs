@@ -24,7 +24,8 @@ namespace WebApplication1.Controllers
         public ActionResult ListarPropostasAssociadas()
         {
             int id = Session.Get<int>("UserId");
-            return View(db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasAssociadas);
+
+            return View(db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasAssociadas.ToList());
         }
 
 
@@ -84,6 +85,29 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostasAssociadas");
         }
 
+        public ActionResult AtribuirNotaAluno(int? idAluno)
+        {
+            var aluno = db.Alunos.Where(x => x.AlunoId == idAluno).FirstOrDefault();
+            if (aluno != null)
+            {
+                return View(aluno);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AtribuirNotaAluno(Aluno Aluno, int? NotaAtribuida)
+        {
+            var aluno = db.Alunos.Where(x => x.AlunoId == Aluno.AlunoId).FirstOrDefault();
+
+            if (aluno != null)
+            {
+                aluno.NotaAtribuida = NotaAtribuida;
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("ListarPropostasAssociadas");
+        }
 
 
 
@@ -91,12 +115,12 @@ namespace WebApplication1.Controllers
 
         public ActionResult AtribuirPropostas()
         {
-            return View(db.Propostas.Where(x=>x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
+            return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
         }
 
         public ActionResult VerCandidatos(int? idProposta)
         {
-            if(idProposta > 0)
+            if (idProposta > 0)
             {
                 var proposta = db.Propostas.Where(x => x.PropostaId == idProposta).FirstOrDefault();
                 ViewBag.PropostaId = proposta.PropostaId;

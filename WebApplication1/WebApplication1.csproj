@@ -293,7 +293,6 @@
     <Content Include="Views\Alunos\Edit.cshtml" />
     <Content Include="Views\Propostas\Create.cshtml" />
     <Content Include="Views\Propostas\Delete.cshtml" />
-    <Content Include="Views\Propostas\Details.cshtml" />
     <Content Include="Views\Propostas\Edit.cshtml" />
     <Content Include="Views\Propostas\ListarPropostas.cshtml" />
     <Content Include="Views\Alunos\ConsultarPreferencias.cshtml" />
@@ -314,6 +313,9 @@
     <Content Include="Views\Mensagem\ListaMensagensRecebidas.cshtml" />
     <Content Include="Views\Mensagem\DetalhesMensagem.cshtml" />
     <Content Include="Views\Docente\PropostasAtribuidas.cshtml" />
+    <Content Include="Views\Propostas\DetalhesProposta.cshtml" />
+    <Content Include="Views\Alunos\PerfilAluno.cshtml" />
+    <Content Include="Views\Docente\AtribuirNotaAluno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -52,9 +52,15 @@ namespace WebApplication1.Controllers
                 return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
             }
         }
+        public ActionResult DetalhesProposta(int? id)
+        {
+            var Proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
 
-        // GET: Propostas/Create
-        public ActionResult Create()
+            return View(Proposta);
+        }
+
+            // GET: Propostas/Create
+            public ActionResult Create()
         {
             ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "DocenteId", "Nome");
             //int id = Session.Get<int>("UserId");

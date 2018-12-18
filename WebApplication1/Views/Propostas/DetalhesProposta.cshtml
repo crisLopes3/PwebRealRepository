@@ -1,10 +1,10 @@
 ﻿@model WebApplication1.Models.Proposta
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "DetalhesProposta";
 }
 
-<h2>Details</h2>
+<h2>DetalhesProposta</h2>
 
 <div>
     <h4>Proposta</h4>
@@ -43,6 +43,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Justificacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Justificacao)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
 
@@ -66,17 +82,8 @@
             @Html.DisplayFor(model => model.Objetivos)
         </dd>
 
-        <dt>
-            @*@Html.DisplayNameFor(model => model.AlunoId)*@
-        </dt>
-
-        <dd>
-            @*@Html.DisplayFor(model => model.AlunoId)*@
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PropostaId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index","Home",null,null)
 </p>

@@ -91,7 +91,15 @@ namespace WebApplication1.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-
+        public ActionResult PerfilAluno(int? id)
+        {
+            var aluno = db.Alunos.Find(id);
+            if (aluno != null)
+            {
+                return View(aluno);
+            }
+            return View();
+        }
 
 
         protected override void Dispose(bool disposing)

@@ -62,7 +62,14 @@
             @Html.DisplayFor(modelItem => item.Objetivos)
         </td>
         <td>
-            @Html.ActionLink("Sair", "SairDaProposta", new { id=item.PropostaId })
+            @Html.ActionLink("Detalhes", "DetalhesProposta","Propostas", new { id = item.PropostaId },null)
+           
+            @if (item.PropostaAlunoAtribuido != null)
+            {
+                @Html.ActionLink("Perfil Aluno", "PerfilAluno", "Alunos", new { id = item.PropostaAlunoAtribuido.AlunoId},null) 
+            }
+            @Html.ActionLink("Sair", "SairDaProposta", new { id = item.PropostaId })
+
         </td>
     </tr>
 }
