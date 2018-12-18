@@ -56,12 +56,8 @@ namespace WebApplication1.Controllers
         // GET: Propostas/Create
         public ActionResult Create()
         {
-            ViewBag.Docentes = new SelectList(db.Docentes.ToList(), "DocenteId", "Nome");
-            //int id = Session.Get<int>("UserId");
-            //ViewBag.CreatePropostaViewModel = new CreatePropostaViewModel
-            //{
-            //    Docentes = db.Docentes.Where(x => x.DocenteId != id).ToList(),
-            //};
+            int id = Session.Get<int>("UserId");
+            ViewBag.Docentes = new SelectList(db.Docentes.Where(x=>x.DocenteId!=id).ToList(), "DocenteId", "Nome");
             return View();
         }
         [HttpPost]
@@ -71,9 +67,23 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 int id = Session.Get<int>("UserId");
+                var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
 
-                db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasCriadas.Add(proposta);
+                docente.PropostasCriadas.Add(proposta);
                 db.Propostas.Add(proposta);
+
+                string[] ssize = docentesAssociados.Trim().Split(' ');
+                foreach(var item in ssize)
+                {
+                    int idDocente = Int32.Parse(item);
+
+                    var docenteAssociado = db.Docentes.Where(x => x.DocenteId == idDocente).FirstOrDefault();
+
+                    proposta.DocentesAtribuidos.Add(docente);
+                    docenteAssociado.PropostasAssociadas.Add(proposta);
+                }
+
+
                 db.SaveChanges();
                 return RedirectToAction("ListarPropostas");
             }
