@@ -316,6 +316,7 @@
     <Content Include="Views\Propostas\DetalhesProposta.cshtml" />
     <Content Include="Views\Alunos\PerfilAluno.cshtml" />
     <Content Include="Views\Docente\AtribuirNotaAluno.cshtml" />
+    <Content Include="Views\Mensagem\ResponderMensagem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

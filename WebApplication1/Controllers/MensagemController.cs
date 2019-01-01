@@ -55,6 +55,21 @@ namespace WebApplication1.Controllers
         {
             return Json(!db.Users.Any(x=>x.Email==destino), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ResponderMensagem(int? id)
+        {
+            var mensagem = db.Mensagens.Where(x => x.MensagemId == id).FirstOrDefault();
+
+            if(mensagem != null){
+                ViewBag.dados = mensagem;
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult ResponderMensagem(Mensagem mensagem)
+        {
+            return NovaMensagem(mensagem);
+        }
 
     }
 }
