@@ -327,6 +327,7 @@
     <Content Include="Views\Propostas\VerResultados.cshtml" />
     <Content Include="Views\Alunos\AvaliarEmpresa.cshtml" />
     <Content Include="Views\Empresa\AvaliarEstagiarios.cshtml" />
+    <Content Include="Views\Docente\Estatisticas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

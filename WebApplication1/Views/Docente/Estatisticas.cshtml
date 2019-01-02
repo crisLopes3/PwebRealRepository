@@ -1,0 +1,116 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "Estatisticas";
+}
+
+<h2>Estatisticas</h2>
+<div>
+    @Html.DropDownList("Ordenar", ((SelectList)ViewBag.TiposOrdenacao), "Ordenar")
+</div>
+
+
+<div id="divPartialViewYear" style="display:none">
+
+    @Html.DropDownList("ExpiryYear", Enumerable.Range(DateTime.Now.Year - 1, 10).Select(x => new SelectListItem { Text = x.ToString() }), "Escolhe Ano")
+</div>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalEstagio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objetivos)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalEstagio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoProposta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Objetivos)
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#divPartialViewYear").hide();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Ordenar").on("change", function (event) {
+
+                var value = $(this).val();
+                //alert(value);
+                if (value === '0') {
+                    location.href = '@Url.Action("Estatisticas", "Docente",new { tipoOrdenacao =0})';
+
+                }else if (value === '1') {
+                    $("#divPartialViewYear").show();
+                } else {
+                    alert("Muito Mal");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ExpiryYear").on("change", function (event) {
+                var value = $(this).val();
+                alert(value)
+                location.href = '@Url.Action("Estatisticas", "Docente",new {AnoEscolhido = "_value" })'.replace('_value',value);
+            });
+        });
+    </script>
+
+}

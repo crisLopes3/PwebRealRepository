@@ -106,7 +106,7 @@ namespace WebApplication1.Controllers
             var aluno = db.Alunos.Where(x => x.AlunoId == alunoId).FirstOrDefault();
             var proposta = aluno.AlunoPropostaAtribuida;
 
-            if (proposta != null && proposta.DataFim<DateTime.Now)
+            if (proposta != null && proposta.DataFim<DateTime.Now && proposta.NotaEmpresaAvaliada==null)
             {
                 var empresa = db.Empresas.Where(x => x.EmpresaId == proposta.EmpresaCriador.EmpresaId).First();
                 if (empresa != null)
@@ -118,7 +118,7 @@ namespace WebApplication1.Controllers
                     return View(empresa);
                 }
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult AvaliarEmpresa(string NomeEmpresa, int ? Avaliar,string proposta)
