@@ -1,0 +1,44 @@
+﻿@model WebApplication1.Models.Empresa
+
+@{
+    ViewBag.Title = "AvaliarEmpresa";
+}
+
+<h2>AvaliarEmpresa</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <h4>Empresa</h4>
+        <hr />
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                @Html.Label("Nome", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBox("NomeEmpresa", null, new { @class = "form-control", @Value = ViewBag.Empresa.Nome })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Proposta", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBox("Proposta", null, new { @class = "form-control", @Value = ViewBag.Proposta.Descricao })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Avaliar", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Avaliar", (SelectList)ViewBag.Notas, "Avaliar", new { @class = "form-control" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Aceitar" class="btn btn-default" />
+            </div>
+        </div>
+}
+

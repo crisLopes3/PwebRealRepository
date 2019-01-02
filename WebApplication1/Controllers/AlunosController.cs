@@ -99,6 +99,41 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
+        public ActionResult AvaliarEmpresa()
+        {
+            int alunoId = Session.Get<int>("UserId");
+            var aluno = db.Alunos.Where(x => x.AlunoId == alunoId).FirstOrDefault();
+            var proposta = aluno.AlunoPropostaAtribuida;
+
+            if (proposta != null && proposta.DataFim<DateTime.Now && proposta.NotaEmpresaAvaliada==null)
+            {
+                var empresa = db.Empresas.Where(x => x.EmpresaId == proposta.EmpresaCriador.EmpresaId).First();
+                if (empresa != null)
+                {
+                    ViewBag.Proposta = proposta;
+                    ViewBag.Empresa = empresa;
+                    ViewBag.IdEmpresa = empresa.EmpresaId;
+                    ViewBag.Notas = new SelectList(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 });
+                    return View(empresa);
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult AvaliarEmpresa(string NomeEmpresa, int ? Avaliar,string proposta)
+        {
+            var Empresa = db.Empresas.Where(x => x.Nome == NomeEmpresa).FirstOrDefault();
+            var Proposta = db.Propostas.Where(x => x.Descricao == proposta).FirstOrDefault();
+            
+            if (Empresa != null && Proposta!=null)
+            {
+                Proposta.NotaEmpresaAvaliada = Avaliar;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+            
 
         [Authorize(Roles = Constantes.Aluno)]
         public ActionResult PropostaAtribuida()

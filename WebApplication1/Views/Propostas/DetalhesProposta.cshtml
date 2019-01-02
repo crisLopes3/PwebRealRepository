@@ -81,6 +81,26 @@
         <dd>
             @Html.DisplayFor(model => model.Objetivos)
         </dd>
+        @if (Model.NotaAlunoAvaliade != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.NotaAlunoAvaliade)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NotaAlunoAvaliade)
+
+            </dd>
+        }
+        @if (Model.NotaEmpresaAvaliada != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.NotaEmpresaAvaliada)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NotaEmpresaAvaliada)
+
+            </dd>
+        }
 
     </dl>
 </div>

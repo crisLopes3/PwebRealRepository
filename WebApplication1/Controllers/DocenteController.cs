@@ -171,12 +171,28 @@ namespace WebApplication1.Controllers
         }
 
         //////////////////////////////////////////////////////////////////Estatisticas
-        [Authorize(Roles = Constantes.Comissao)]
-        public ActionResult PropostasComMaisCandidatos()
-        {          
-            return View(db.Propostas.Where(x=>x.Estado == true).OrderByDescending(x => x.Alunos.Count).ToList());
-        }
 
+
+        public ActionResult Estatisticas(int? tipoOrdenacao, int? AnoEscolhido)
+        {
+
+            ViewBag.TiposOrdenacao = new SelectList(new List<Object>{
+                       new { value = 0 , text = "Com mais candidatos"  },
+                       new { value = 1 , text = "Com mais candidatos num ano" },
+                    }, "value", "text", 2);
+
+            if (tipoOrdenacao!=null)
+            {
+
+                return View(db.Propostas.Where(x => x.Estado == true).OrderByDescending(x => x.Alunos.Count).ToList());
+            }
+            else if (tipoOrdenacao ==null && AnoEscolhido != null)
+            {
+          
+                return View(db.Propostas.Where(x => x.Estado == true && x.DataInicio.Year == AnoEscolhido).OrderByDescending(x => x.Alunos.Count).ToList());
+            }
+            return View(db.Propostas.Where(x => x.Estado == true).ToList());
+        }
     }
 }
 

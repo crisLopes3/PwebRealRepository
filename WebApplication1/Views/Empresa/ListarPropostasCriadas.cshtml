@@ -70,8 +70,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Objetivos)
         </td>
+       
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.PropostaId })
+            @if (item.Estado == true && item.DataFim < DateTime.Now && item.PropostaAlunoAtribuido != null && item.NotaAlunoAvaliade == null)
+            {
+                @Html.ActionLink("Avaliar Estagiario ", "AvaliarEstagiarios", new { id = item.PropostaId })
+            }
+            @Html.ActionLink("Detalhes", "DetalhesProposta", "Propostas", new { id = item.PropostaId },null)
         </td>
     </tr>
 }

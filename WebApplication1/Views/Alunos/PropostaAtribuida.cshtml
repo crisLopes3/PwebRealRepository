@@ -65,8 +65,28 @@
             <dd>
                 @Html.DisplayFor(model => model.Objetivos)
             </dd>
-        </dl>
-    </div>
+
+            @if (Model.NotaAlunoAvaliade != null)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.NotaAlunoAvaliade)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NotaAlunoAvaliade)
+
+                </dd>
+            }
+            @if (Model.NotaEmpresaAvaliada != null)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.NotaEmpresaAvaliada)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NotaEmpresaAvaliada)
+
+                </dd>
+            }
+</div>
     <div>
         <hr />
         <dl class="dl-horizontal">
@@ -79,7 +99,7 @@
                     @Html.DisplayFor(modelItem => Model.DocenteCriador.Nome)
                 </dd>
                 <dd>
-                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.DocenteCriador.Nome}, null)
+                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.DocenteCriador.Nome }, null)
                 </dd>
             }
             else if (Model.EmpresaCriador != null)
@@ -88,10 +108,16 @@
                     @Html.DisplayFor(modelItem => Model.EmpresaCriador.Nome)
                 </dd>
                 <dd>
-                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.EmpresaCriador.Nome}, null)
+                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.EmpresaCriador.Nome }, null)
+                </dd>
+
+            }
+            @if (Model.NotaEmpresaAvaliada == null)
+            {
+                <dd>
+                    @Html.ActionLink("Avaliar Empresa", "AvaliarEmpresa", "Alunos", new { email = Model.EmpresaCriador.Nome }, null)
                 </dd>
             }
-
 
         </dl>
     </div>

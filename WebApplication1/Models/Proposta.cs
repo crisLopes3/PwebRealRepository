@@ -42,7 +42,10 @@ namespace WebApplication1.Models
         public virtual Aluno PropostaAlunoAtribuido { get; set; }
         [InverseProperty("Preferencias")]
         public virtual ICollection<Aluno> Alunos { get; set; }
-
+        [Display(Name = "Avaliacao aluno")]
+        public int ?NotaAlunoAvaliade { get; set; }
+        [Display(Name = "Avaliacao Empresa")]
+        public int ?NotaEmpresaAvaliada { get; set; }
 
         public virtual Empresa EmpresaCriador { get; set; }
 
