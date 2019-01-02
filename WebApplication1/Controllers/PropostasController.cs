@@ -190,6 +190,12 @@ namespace WebApplication1.Controllers
         }
 
 
+        public ActionResult VerResultados()
+        {
+            var resultados = db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).ToList();
+            return View(resultados);
+        }
+
 
 
         protected override void Dispose(bool disposing)

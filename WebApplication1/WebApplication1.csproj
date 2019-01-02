@@ -321,6 +321,7 @@
     <Content Include="Views\Empresa\ListarPropostasCriadas.cshtml" />
     <Content Include="Views\Docente\PropostasComMaisCandidatos.cshtml" />
     <Content Include="Views\Alunos\PropostaAtribuida.cshtml" />
+    <Content Include="Views\Propostas\VerResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

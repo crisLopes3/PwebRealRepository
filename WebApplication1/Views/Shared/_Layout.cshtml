@@ -25,6 +25,7 @@
         {*@
                     <li>@Html.ActionLink("Consultar Propostas", "ListarPropostas", "Propostas")</li>
                     @*  *@}
+                    <li>@Html.ActionLink("Resultados", "VerResultados", "Propostas")</li>
 
                     @if (User.IsInRole("Admin"))
                     {
@@ -67,6 +68,7 @@
                                 <li>@Html.ActionLink("Caixa de Correio", "ListaMensagensRecebidas", "Mensagem")</li>
                             </ul>
                         </li>
+
                     }
                     @if (User.IsInRole("Docente"))
                     {

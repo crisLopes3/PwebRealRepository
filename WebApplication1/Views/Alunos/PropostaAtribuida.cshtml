@@ -6,7 +6,6 @@
 
 <h2>Proposta Atríbuida</h2>
 
-
 @if (Model != null)
 {
     <div>
@@ -66,7 +65,6 @@
             <dd>
                 @Html.DisplayFor(model => model.Objetivos)
             </dd>
-
         </dl>
     </div>
     <div>
@@ -75,17 +73,23 @@
             <dt>
                 @Html.DisplayName("Orientador")
             </dt>
-            <dd>
-                @Html.DisplayFor(modelItem => Model.DocenteCriador.Nome)
-            </dd>
-
+            @if (Model.DocenteCriador != null)
+            {
+                <dd>
+                    @Html.DisplayFor(modelItem => Model.DocenteCriador.Nome)
+                </dd>
+            }
+            else if (Model.EmpresaCriador != null)
+            {
+                <dd>
+                    @Html.DisplayFor(modelItem => Model.EmpresaCriador.Nome)
+                </dd>
+            }
             <dd>
                 @Html.ActionLink("Enviar mensagem", "AtribuirAluno")
             </dd>
-
         </dl>
     </div>
-
 }
 else
 {
