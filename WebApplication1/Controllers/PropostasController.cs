@@ -49,7 +49,8 @@ namespace WebApplication1.Controllers
                 if (tipoOrdenacao == 0)
                     return View(db.Propostas.Where(x => x.Estado == true 
                     && x.PropostaAlunoAtribuido != null).OrderBy(x => x.Ramo));
-                return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
+                return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
+                //return View(db.Propostas.Where(x => x.Estado == true).ToList());
             }
         }
         public ActionResult DetalhesProposta(int? id)
@@ -78,16 +79,26 @@ namespace WebApplication1.Controllers
                 docente.PropostasCriadas.Add(proposta);
                 db.Propostas.Add(proposta);
 
-                string[] ssize = docentesAssociados.Trim().Split(' ');
-                foreach(var item in ssize)
+                if (User.IsInRole("Docente"))
                 {
-                    int idDocente = Int32.Parse(item);
+                    if (docentesAssociados != "")
+                    {
+                        string[] ssize = docentesAssociados.Trim().Split(' ');
+                    
+                        foreach (var item in ssize)
+                        {
+                            int idDocente = Int32.Parse(item);
 
-                    var docenteAssociado = db.Docentes.Where(x => x.DocenteId == idDocente).FirstOrDefault();
+                            var docenteAssociado = db.Docentes.Where(x => x.DocenteId == idDocente).FirstOrDefault();
 
-                    proposta.DocentesAtribuidos.Add(docente);
-                    docenteAssociado.PropostasAssociadas.Add(proposta);
+                            proposta.DocentesAtribuidos.Add(docente);
+                            docenteAssociado.PropostasAssociadas.Add(proposta);
+                        }
+                    }
+                 
                 }
+
+                   
 
 
                 db.SaveChanges();

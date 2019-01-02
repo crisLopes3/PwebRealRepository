@@ -31,18 +31,41 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TipoProposta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TipoProposta, "Tipo", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TipoProposta, "", new { @class = "text-danger" })
+
+        @if (User.IsInRole("Docente"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.TipoProposta, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.TipoProposta, "Tipo", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipoProposta, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+
+            <div class="form-group" id="docentesId" style="display:none">
+                @Html.Label("Associar Docentes", new { @class = "col-md-2 control-label" })
+                <table>
+                    @foreach (var item in ViewBag.Docentes)
+                    {
+                        <tr>
+                            <td>
+
+                                <input type="checkbox" id="DOC-@item.Value"
+                                       value=@item.Value onclick="xx(this)" /> @item.Text
+
+
+                                </td>
+
+                            </tr>
+                        }
+                </table>
+            </div>
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Ramo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Ramo, htmlAttributes: new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.Ramo, htmlAttributes: new { @class = "form-control", id = "modelRamo" })
                 @Html.ValidationMessageFor(model => model.Ramo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,18 +94,7 @@
             </div>
         </div>
 
-        <div class="form-group">
 
-            @foreach (var item in ViewBag.Docentes)
-            {
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="DOC-@item.Value"
-                               value=@item.Value onclick="xx(this)" /> @item.Text
-                        </label>
-                    </div>
-                }
-        </div>
 
         @Html.Hidden("docentesAssociados", "");
 
@@ -108,8 +120,21 @@
     <script>
         function xx(elemento) {
             alert($(elemento).val());
-            $("#docentesAssociados").val($("#docentesAssociados").val() + $(elemento).val()+" ");
+            $("#docentesAssociados").val($("#docentesAssociados").val() + $(elemento).val() + " ");
         }
+    </script>
+
+    <script type="text/javascript">
+        $("#TipoProposta").change(function (event) {
+
+            var ramo = $(this).val();
+            if (ramo === "1") {
+                $("#docentesId").show();
+            } else {
+                $("#docentesId").hide();
+            }
+
+        });
     </script>
 }
 
