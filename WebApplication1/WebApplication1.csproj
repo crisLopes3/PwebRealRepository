@@ -220,7 +220,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Aluno.cs" />
-    <Compile Include="Models\Avaliacao.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Docente.cs" />
@@ -317,6 +316,7 @@
     <Content Include="Views\Alunos\PerfilAluno.cshtml" />
     <Content Include="Views\Docente\AtribuirNotaAluno.cshtml" />
     <Content Include="Views\Mensagem\ResponderMensagem.cshtml" />
+    <Content Include="Views\Alunos\AvaliarEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
