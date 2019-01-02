@@ -43,6 +43,8 @@ namespace WebApplication1.Models
         [InverseProperty("Preferencias")]
         public virtual ICollection<Aluno> Alunos { get; set; }
 
+        public int ?NotaAlunoAvaliade { get; set; }
+        public int ?NotaEmpresaAvaliada { get; set; }
 
         public virtual Empresa EmpresaCriador { get; set; }
 

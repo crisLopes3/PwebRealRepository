@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201812172059292_m.Designer.cs">
       <DependentUpon>201812172059292_m.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901021511568_m7.cs" />
+    <Compile Include="Migrations\201901021511568_m7.Designer.cs">
+      <DependentUpon>201901021511568_m7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Aluno.cs" />
@@ -319,6 +323,7 @@
     <Content Include="Views\Mensagem\ResponderMensagem.cshtml" />
     <Content Include="Views\Empresa\ListarPropostasCriadas.cshtml" />
     <Content Include="Views\Alunos\AvaliarEmpresa.cshtml" />
+    <Content Include="Views\Empresa\AvaliarEstagiarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -339,6 +344,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812172059292_m.resx">
       <DependentUpon>201812172059292_m.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021511568_m7.resx">
+      <DependentUpon>201901021511568_m7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
