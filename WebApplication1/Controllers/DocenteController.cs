@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult AtribuirPropostas()
         {
-            return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido != null).ToList());
+            return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
         }
 
         public ActionResult VerCandidatos(int? idProposta)
