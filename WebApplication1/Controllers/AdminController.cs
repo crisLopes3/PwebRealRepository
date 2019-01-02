@@ -40,10 +40,6 @@ namespace WebApplication1.Controllers
 
             if (docente != null)
             {
-
-                //ApplicationUserManager a = null;
-                //await a.AddToRoleAsync(docente.UserId, "Comissao");
-
                 docente.PertenceComissao = false;
                 db.SaveChanges();
             }
@@ -71,6 +67,35 @@ namespace WebApplication1.Controllers
         public ActionResult ListarComissao()
         {
             return View(db.Docentes.Where(x => x.PertenceComissao == true).ToList());
+        }
+
+        [Authorize(Roles = Constantes.Admin)]
+        [HttpGet]
+        public ActionResult EliminarPropostas()
+        {
+            return View(db.Propostas.ToList());
+        }
+
+        [Authorize(Roles = Constantes.Admin)]
+        public ActionResult EliminarProposta(int? id)
+        {
+            var proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
+            
+
+            if(proposta.TipoProposta == TipoProposta.Projeto)
+            {
+                foreach (var docente in proposta.DocentesAtribuidos)
+                {
+                    docente.PropostasAssociadas.Remove(proposta);
+                }         
+            }
+
+            db.Propostas.Remove(proposta);
+
+
+            db.SaveChanges();
+
+            return RedirectToAction("EliminarPropostas");
         }
     }
 }

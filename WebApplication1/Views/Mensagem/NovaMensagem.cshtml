@@ -4,7 +4,7 @@
     ViewBag.Title = "NovaMensagem";
 }
 
-<h2>NovaMensagem</h2>
+<h2>Nova Mensagem</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Mensagem</h4>
         <hr />
 
         @if (ViewBag.emailOrientador != null)
@@ -63,10 +62,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

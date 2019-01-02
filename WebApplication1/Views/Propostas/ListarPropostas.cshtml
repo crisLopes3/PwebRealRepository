@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<WebApplication1.Models.Proposta>
-
+@using WebApplication1.Models
 @{
     ViewBag.Title = "ListarPropostas";
 }
@@ -77,14 +77,21 @@
                 {
                     if (ViewBag.PropostaDoAluno != null)
                     {
-                       @Html.Display("Já tens um estágio atribuido")
+                        @Html.Label("Já tem uma aproposta atribuida")
                     }
                     else
                     {
                         if (!ViewBag.AlunoPreferencias.Contains(item.PropostaId))
                         {
-                            @Html.ActionLink("Candidatar-me", "Candidatura", "Alunos", new { id = item.PropostaId }, null)
-
+                            if (ViewBag.AlunoPreferencias.Count >= Constantes.MaxCandidaturas)
+                            {
+                                @Html.Label("Já escedeu o limite de candidaturas: "+ Constantes.MaxCandidaturas)
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Candidatar-me", "Candidatura", "Alunos", new { id = item.PropostaId },
+                          new { onclick = "return confirm ('Deseja Candidatar-se?');" })
+                            }
                         }
                         else
                         {

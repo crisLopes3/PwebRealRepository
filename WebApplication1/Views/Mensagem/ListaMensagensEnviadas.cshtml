@@ -4,11 +4,8 @@
     ViewBag.Title = "ListaMensagensEnviadas";
 }
 
-<h2>ListaMensagensEnviadas</h2>
+<h2>Mensagens Enviadas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -33,12 +30,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MensagemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MensagemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MensagemId })
-        </td>
+        </td>      
     </tr>
 }
 

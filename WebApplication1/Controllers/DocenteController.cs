@@ -119,7 +119,9 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = Constantes.Comissao)]
         public ActionResult AtribuirPropostas()
         {
-            ViewBag.max = db.Settings.Where(x => x.SettingId == "Max_Candidaturas").Select(x=>x.Value).FirstOrDefault();
+            var max = db.Settings.Where(x => x.SettingId == "Max_Candidaturas").Select(x=>x.Value).FirstOrDefault();
+            Constantes.MaxCandidaturas = Int32.Parse(max);
+            ViewBag.max = max;
             return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
         }
 
@@ -146,7 +148,7 @@ namespace WebApplication1.Controllers
                 aluno.AlunoPropostaAtribuida = proposta;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AtribuirPropostas");
         }
 
         [Authorize(Roles = Constantes.Comissao)]
@@ -165,6 +167,8 @@ namespace WebApplication1.Controllers
             else
                 seting.Value = max;
 
+            Constantes.MaxCandidaturas = Int32.Parse(max);
+
             db.SaveChanges();
 
             return RedirectToAction("AtribuirPropostas");
@@ -176,8 +180,8 @@ namespace WebApplication1.Controllers
         {
 
             ViewBag.TiposOrdenacao = new SelectList(new List<Object>{
-                       new { value = 0 , text = "Com mais candidatos"  },
-                       new { value = 1 , text = "Com mais candidatos num ano" },
+                       new { value = 0 , text = "Propostas com mais candidatos"  },
+                       new { value = 1 , text = "Propostas com mais candidatos num ano" },
                     }, "value", "text", 2);
 
             if (tipoOrdenacao!=null)

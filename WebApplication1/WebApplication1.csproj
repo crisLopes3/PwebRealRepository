@@ -320,9 +320,10 @@
     <Content Include="Views\Docente\AtribuirNotaAluno.cshtml" />
     <Content Include="Views\Mensagem\ResponderMensagem.cshtml" />
     <Content Include="Views\Empresa\ListarPropostasCriadas.cshtml" />
-    <Content Include="Views\Docente\PropostasComMaisCandidatos.cshtml" />
     <Content Include="Views\Alunos\PropostaAtribuida.cshtml" />
     <Content Include="Views\Propostas\VerResultados.cshtml" />
+    <Content Include="Views\Empresa\AvaliarEstagiarios.cshtml" />
+    <Content Include="Views\Admin\EliminarPropostas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -37,7 +37,7 @@ namespace WebApplication1.Controllers
                 Criador.MensagensCriadas.Add(mensagem);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("ListaMensagensEnviadas");
         }
 
         [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
@@ -75,7 +75,7 @@ namespace WebApplication1.Controllers
                 ViewBag.dados = mensagem;
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ListaMensagensEnviadas");
         }
         [HttpPost]
         [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]

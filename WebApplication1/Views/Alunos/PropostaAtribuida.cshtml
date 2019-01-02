@@ -112,7 +112,7 @@
                 </dd>
 
             }
-            @if (Model.NotaEmpresaAvaliada == null)
+            @if (Model.NotaEmpresaAvaliada != null)
             {
                 <dd>
                     @Html.ActionLink("Avaliar Empresa", "AvaliarEmpresa", "Alunos", new { email = Model.EmpresaCriador.Nome }, null)

@@ -89,6 +89,7 @@ namespace WebApplication1.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+
         [Authorize(Roles = Constantes.Docente + "," + Constantes.Comissao)]
         public ActionResult PerfilAluno(int? id)
         {
