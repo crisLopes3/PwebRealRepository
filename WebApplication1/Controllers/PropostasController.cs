@@ -20,6 +20,8 @@ namespace WebApplication1.Controllers
             if (User.IsInRole("Aluno"))
             {
                 int id = Session.Get<int>("UserId");
+                var aluno = db.Alunos.Where(x => x.AlunoId == id).FirstOrDefault();
+                ViewBag.PropostaDoAluno = aluno.AlunoPropostaAtribuida != null ? aluno.AlunoPropostaAtribuida:  null ;
                 ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
             }
 

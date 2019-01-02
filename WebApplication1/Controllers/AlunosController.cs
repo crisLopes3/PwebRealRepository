@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
         private Context db = new Context();
 
        
-
+   
 
         //Editar Detalhes do aluno
         public ActionResult Edit(int? id)
@@ -99,6 +99,12 @@ namespace WebApplication1.Controllers
                 return View(aluno);
             }
             return View();
+        }
+
+        public ActionResult PropostaAtribuida()
+        {
+            int alunoId = Session.Get<int>("UserId");
+            return View(db.Alunos.Where(x=>x.AlunoId == alunoId).FirstOrDefault().AlunoPropostaAtribuida);
         }
 
 

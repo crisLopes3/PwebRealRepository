@@ -1,0 +1,96 @@
+﻿@model WebApplication1.Models.Proposta
+
+@{
+    ViewBag.Title = "PropostaAtribuida";
+}
+
+<h2>Proposta Atríbuida</h2>
+
+
+@if (Model != null)
+{
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LocalEstagio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LocalEstagio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoProposta)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TipoProposta)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ramo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ramo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataInicio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataFim)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataFim)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Objetivos)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Objetivos)
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Orientador")
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => Model.DocenteCriador.Nome)
+            </dd>
+
+            <dd>
+                @Html.ActionLink("Enviar mensagem", "AtribuirAluno")
+            </dd>
+
+        </dl>
+    </div>
+
+}
+else
+{
+    <h1>Ainda não lhe foi atríbuida nenhuma proposta</h1>
+}
+
+
+

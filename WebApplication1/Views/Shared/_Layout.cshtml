@@ -52,6 +52,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Proposta Atribuida", "PropostaAtribuida", "Alunos")</li>
                                 <li>@Html.ActionLink("Consultar Preferencias", "ConsultarPreferencias", "Alunos")</li>
                             </ul>
                         </li>
@@ -128,9 +129,11 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Atribuir Propostas", "AtribuirPropostas", "Docente")</li>
-                                 <li>@Html.ActionLink("Propostas Atribuidas", "PropostasAtribuidas", "Docente")</li>
+                                <li>@Html.ActionLink("Propostas Atribuidas", "PropostasAtribuidas", "Docente")</li>
                             </ul>
                         </li>
+
+                        <li>@Html.ActionLink("Estatísticas", "PropostasComMaisCandidatos", "Docente")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

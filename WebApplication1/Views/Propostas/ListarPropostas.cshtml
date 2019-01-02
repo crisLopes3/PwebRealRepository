@@ -75,16 +75,24 @@
             <td>
                 @if (User.IsInRole("Aluno"))
                 {
-                    if (!ViewBag.AlunoPreferencias.Contains(item.PropostaId))
+                    if (ViewBag.PropostaDoAluno != null)
                     {
-                        @Html.ActionLink("Candidatar-me", "Candidatura", "Alunos", new { id = item.PropostaId }, null)
-
+                       @Html.Display("Já tens um estágio atribuido")
                     }
                     else
                     {
-                        @Html.ActionLink("Remover", "RemoverCandidatura", "Alunos", new { id = item.PropostaId },
-                       new { onclick = "return confirm ('Deseja remover a candidatura a"+item.Descricao+ "?');" })
+                        if (!ViewBag.AlunoPreferencias.Contains(item.PropostaId))
+                        {
+                            @Html.ActionLink("Candidatar-me", "Candidatura", "Alunos", new { id = item.PropostaId }, null)
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Remover", "RemoverCandidatura", "Alunos", new { id = item.PropostaId },
+                           new { onclick = "return confirm ('Deseja remover a candidatura a"+item.Descricao+ "?');" })
+                        }
                     }
+
                 }
                 else if (User.IsInRole("Comissao"))
                 {
