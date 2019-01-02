@@ -78,16 +78,21 @@
                 <dd>
                     @Html.DisplayFor(modelItem => Model.DocenteCriador.Nome)
                 </dd>
+                <dd>
+                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.DocenteCriador.Nome}, null)
+                </dd>
             }
             else if (Model.EmpresaCriador != null)
             {
                 <dd>
                     @Html.DisplayFor(modelItem => Model.EmpresaCriador.Nome)
                 </dd>
+                <dd>
+                    @Html.ActionLink("Enviar mensagem", "NovaMensagem", "Mensagem", new { email = Model.EmpresaCriador.Nome}, null)
+                </dd>
             }
-            <dd>
-                @Html.ActionLink("Enviar mensagem", "AtribuirAluno")
-            </dd>
+
+
         </dl>
     </div>
 }
