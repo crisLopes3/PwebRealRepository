@@ -50,7 +50,6 @@ namespace WebApplication1.Controllers
                     return View(db.Propostas.Where(x => x.Estado == true 
                     && x.PropostaAlunoAtribuido == null).OrderBy(x => x.Ramo));
                 return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
-                //return View(db.Propostas.Where(x => x.Estado == true).ToList());
             }
         }
         public ActionResult DetalhesProposta(int? id)
@@ -74,13 +73,15 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 int id = Session.Get<int>("UserId");
-                var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
-
-                docente.PropostasCriadas.Add(proposta);
+                
                 db.Propostas.Add(proposta);
 
                 if (User.IsInRole("Docente"))
                 {
+
+                    var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
+                    docente.PropostasCriadas.Add(proposta);
+
                     if (docentesAssociados != "")
                     {
                         string[] ssize = docentesAssociados.Trim().Split(' ');
@@ -96,10 +97,12 @@ namespace WebApplication1.Controllers
                         }
                     }
                  
+                }else if (User.IsInRole("Empresa"))
+                {
+                    var empresa = db.Empresas.Where(x => x.EmpresaId == id).FirstOrDefault();
+                    empresa.PropostasCriadas.Add(proposta);
+
                 }
-
-                   
-
 
                 db.SaveChanges();
                 return RedirectToAction("ListarPropostas");

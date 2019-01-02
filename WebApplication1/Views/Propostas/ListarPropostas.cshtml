@@ -119,7 +119,7 @@
             $("#Ordenar").on("change", function (event) {
 
                 var value = $(this).val();
-                alert(value);
+                //alert(value);
                 if (value === '0') {
                     location.href = '@Url.Action("ListarPropostas", "Propostas", new { tipoOrdenacao = 0})'
                 }
