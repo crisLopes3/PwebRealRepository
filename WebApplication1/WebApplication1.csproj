@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MensagemController.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Alunos\PerfilAluno.cshtml" />
     <Content Include="Views\Docente\AtribuirNotaAluno.cshtml" />
     <Content Include="Views\Mensagem\ResponderMensagem.cshtml" />
+    <Content Include="Views\Empresa\ListarPropostasCriadas.cshtml" />
     <Content Include="Views\Alunos\AvaliarEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
