@@ -171,8 +171,7 @@ namespace WebApplication1.Controllers
         }
 
         //////////////////////////////////////////////////////////////////Estatisticas
-
-
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult Estatisticas(int? tipoOrdenacao, int? AnoEscolhido)
         {
 
