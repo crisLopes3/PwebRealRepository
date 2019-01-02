@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<WebApplication1.Models.Proposta>
+@using WebApplication1.Models
 
 @{
     ViewBag.Title = "AtribuirPropostas";
 }
 
-<h2>AtribuirPropostas</h2>
+<h2>Atribuir Propostas</h2>
+
+
+@Html.Hidden("cris", 5)
 
 <table class="table">
     <tr>
+
         <th>
             @Html.DisplayNameFor(model => model.Descricao)
         </th>
@@ -23,33 +28,61 @@
         <th>
             @Html.DisplayNameFor(model => model.DataFim)
         </th>
-        
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoProposta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataFim)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Ver Candidatos", "VerCandidatos", new { idProposta = item.PropostaId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoProposta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+
+            <td>
+                @Html.ActionLink("Ver Candidatos", "VerCandidatos", new { idProposta = item.PropostaId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.Label("Max Candidaturas", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBox("maxId", (string) ViewBag.max)
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input onclick="MyFunction()" type="submit" value="Save" class="btn btn-default" />
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function MyFunction() {    
+            var max = $("#maxId").val();
+            location.href = '@Url.Action("DefinirMaxCandidaturasPorAluno", "Docente", new { max = "_max" })'.replace('_max', max);
+        }
+    </script>
+}
+

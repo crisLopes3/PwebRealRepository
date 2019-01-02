@@ -14,19 +14,17 @@ namespace WebApplication1.Controllers
         private Context db = new Context();
         // GET: Mensagem
         [HttpGet]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa +"," + Constantes.Aluno)]
         public ActionResult NovaMensagem(string email)
         {
             ViewBag.emailOrientador = email;
             return View();
         }
 
-        //public ActionResult NovaMensagem(string email)
-        //{
-        //    
-        //    return View();
-        //}
+       
 
         [HttpPost]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult NovaMensagem(Mensagem mensagem)
         {
             if (ModelState.IsValid)
@@ -42,6 +40,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult ListaMensagensEnviadas()
         {
             var idUser = User.Identity.GetUserId();
@@ -49,21 +48,25 @@ namespace WebApplication1.Controllers
             return View(mesagensEnviadas);
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult ListaMensagensRecebidas()
         {
             var idUser = User.Identity.GetUserId();
             var mesagensRecebidas = db.Mensagens.Where(x => x.Recetor.Id == idUser).ToList();
             return View(mesagensRecebidas);
         }
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult DetalhesMensagem(int? id)
         {
             var mensagem = db.Mensagens.Where(x => x.MensagemId == id).First();
             return View(mensagem);
         }
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public JsonResult VerificaDestinario(string destino)
         {
             return Json(!db.Users.Any(x=>x.Email==destino), JsonRequestBehavior.AllowGet);
         }
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult ResponderMensagem(int? id)
         {
             var mensagem = db.Mensagens.Where(x => x.MensagemId == id).FirstOrDefault();
@@ -75,6 +78,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa + "," + Constantes.Aluno)]
         public ActionResult ResponderMensagem(Mensagem mensagem)
         {
             return NovaMensagem(mensagem);

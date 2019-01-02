@@ -17,21 +17,23 @@ namespace WebApplication1.Controllers
         private Context db = new Context();
         private ApplicationDbContext context = new ApplicationDbContext();
 
-
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult ListarAlunos()
         {
             return View(db.Alunos.ToList());
         }
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult ListarEmpresas()
         {
             return View(db.Empresas.ToList());
         }
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult ListarDocentes()
         {
             return View(db.Docentes.ToList());
         }
 
-
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult RetirarDaComissao(int? id)
         {
             var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
@@ -49,6 +51,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarDocentes");
         }
 
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult AdicionarNaComissao(int? id)
         {
             var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
@@ -64,7 +67,7 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("ListarDocentes");
         }
-
+        [Authorize(Roles = Constantes.Admin)]
         public ActionResult ListarComissao()
         {
             return View(db.Docentes.Where(x => x.PertenceComissao == true).ToList());

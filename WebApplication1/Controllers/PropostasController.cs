@@ -15,13 +15,14 @@ namespace WebApplication1.Controllers
         private Context db = new Context();
 
         // GET: Propostas
+        [AllowAnonymous]
         public ActionResult ListarPropostas(int? tipoOrdenacao)
         {
             if (User.IsInRole("Aluno"))
             {
                 int id = Session.Get<int>("UserId");
                 var aluno = db.Alunos.Where(x => x.AlunoId == id).FirstOrDefault();
-                ViewBag.PropostaDoAluno = aluno.AlunoPropostaAtribuida != null ? aluno.AlunoPropostaAtribuida:  null ;
+                ViewBag.PropostaDoAluno = aluno.AlunoPropostaAtribuida != null ? aluno.AlunoPropostaAtribuida : null;
                 ViewBag.AlunoPreferencias = db.Alunos.Where(x => x.AlunoId == id).SelectMany(x => x.Preferencias).Select(x => x.PropostaId).ToList();
             }
 
@@ -49,11 +50,12 @@ namespace WebApplication1.Controllers
                     return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).
                         OrderBy(x => x.LocalEstagio));
                 if (tipoOrdenacao == 0)
-                    return View(db.Propostas.Where(x => x.Estado == true 
+                    return View(db.Propostas.Where(x => x.Estado == true
                     && x.PropostaAlunoAtribuido == null).OrderBy(x => x.Ramo));
                 return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
             }
         }
+        [AllowAnonymous]
         public ActionResult DetalhesProposta(int? id)
         {
             var Proposta = db.Propostas.Where(x => x.PropostaId == id).FirstOrDefault();
@@ -61,24 +63,30 @@ namespace WebApplication1.Controllers
             return View(Proposta);
         }
 
-            // GET: Propostas/Create
-            public ActionResult Create()
+        // GET: Propostas/Create
+
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente +","+ Constantes.Empresa)]
+        public ActionResult Create()
         {
-            int id = Session.Get<int>("UserId");
-            ViewBag.Docentes = new SelectList(db.Docentes.Where(x=>x.DocenteId!=id).ToList(), "DocenteId", "Nome");
+            if (User.IsInRole(Constantes.Docente))
+            {
+                int id = Session.Get<int>("UserId");
+                ViewBag.Docentes = new SelectList(db.Docentes.Where(x => x.DocenteId != id).ToList(), "DocenteId", "Nome");
+            }                         
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta,string docentesAssociados)
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
+        public ActionResult Create([Bind(Include = "PropostaId,Descricao,LocalEstagio,TipoProposta,Ramo,DataInicio,DataFim,Objetivos,AlunoId")] Proposta proposta, string docentesAssociados)
         {
             if (ModelState.IsValid)
             {
                 int id = Session.Get<int>("UserId");
-                
+
                 db.Propostas.Add(proposta);
 
-                if (User.IsInRole("Docente"))
+                if (User.IsInRole(Constantes.Docente))
                 {
 
                     var docente = db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault();
@@ -87,7 +95,7 @@ namespace WebApplication1.Controllers
                     if (docentesAssociados != "")
                     {
                         string[] ssize = docentesAssociados.Trim().Split(' ');
-                    
+
                         foreach (var item in ssize)
                         {
                             int idDocente = Int32.Parse(item);
@@ -98,8 +106,9 @@ namespace WebApplication1.Controllers
                             docenteAssociado.PropostasAssociadas.Add(proposta);
                         }
                     }
-                 
-                }else if (User.IsInRole("Empresa"))
+
+                }
+                else if (User.IsInRole(Constantes.Empresa))
                 {
                     var empresa = db.Empresas.Where(x => x.EmpresaId == id).FirstOrDefault();
                     empresa.PropostasCriadas.Add(proposta);
@@ -129,6 +138,7 @@ namespace WebApplication1.Controllers
         // POST: Propostas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
         public ActionResult DeleteConfirmed(int id)
         {
             Proposta proposta = db.Propostas.Find(id);
@@ -137,6 +147,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostas");
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
         public ActionResult AceitarProposta(int? id)
         {
             if (id == null)
@@ -152,6 +163,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
         public ActionResult AceitarProposta(Proposta proposta, string Justificacao)
         {
             var aux = db.Propostas.Where(x => x.PropostaId == proposta.PropostaId).FirstOrDefault();
@@ -164,6 +176,7 @@ namespace WebApplication1.Controllers
 
 
         }
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
         public ActionResult RecusarProposta(int? id)
         {
             if (id == null)
@@ -177,7 +190,9 @@ namespace WebApplication1.Controllers
             }
             return View(proposta);
         }
+
         [HttpPost]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente + "," + Constantes.Empresa)]
         public ActionResult RecusarProposta(Proposta proposta, string Justificacao)
         {
             var aux = db.Propostas.Where(x => x.PropostaId == proposta.PropostaId).FirstOrDefault();
@@ -189,7 +204,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostas");
         }
 
-
+        [AllowAnonymous]
         public ActionResult VerResultados()
         {
             var resultados = db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).ToList();

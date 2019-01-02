@@ -14,9 +14,6 @@ namespace WebApplication1.Controllers
     {
         private Context db = new Context();
 
-       
-   
-
         //Editar Detalhes do aluno
         public ActionResult Edit(int? id)
         {
@@ -46,7 +43,7 @@ namespace WebApplication1.Controllers
             return View(aluno);
         }
 
-
+        [Authorize(Roles = Constantes.Aluno)]
         public ActionResult ConsultarPreferencias()
         {
             int alunoId = Session.Get<int>("UserId");
@@ -58,6 +55,7 @@ namespace WebApplication1.Controllers
             return View(query.ToList());
         }
 
+        [Authorize(Roles = Constantes.Aluno)]
         public ActionResult Candidatura(int? id)
         {
             int alunoId = Session.Get<int>("UserId");
@@ -74,7 +72,7 @@ namespace WebApplication1.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-
+        [Authorize(Roles = Constantes.Aluno)]
         public ActionResult RemoverCandidatura(int? id)
         {
             int alunoId = Session.Get<int>("UserId");
@@ -91,6 +89,7 @@ namespace WebApplication1.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+        [Authorize(Roles = Constantes.Aluno)]
         public ActionResult PerfilAluno(int? id)
         {
             var aluno = db.Alunos.Find(id);
@@ -101,6 +100,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize(Roles = Constantes.Aluno)]
         public ActionResult PropostaAtribuida()
         {
             int alunoId = Session.Get<int>("UserId");

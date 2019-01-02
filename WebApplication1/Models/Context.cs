@@ -12,6 +12,7 @@ namespace WebApplication1.Models
         {
 
         }
+        public DbSet<Setting> Settings { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Docente> Docentes { get; set; }

@@ -94,18 +94,11 @@
             </div>
         </div>
 
-
-
         @Html.Hidden("docentesAssociados", "");
-
-        @*<div class="form-group">
-                @Html.CheckBoxListFor(model => model.PostedDocentes, model => model.DocentesAtribuidos, x => x.DocenteId, x => x.Nome, model => model.PostedDocentes)
-            </div>*@
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input onclick="myFunction()" type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -124,6 +117,7 @@
         }
     </script>
 
+
     <script type="text/javascript">
         $("#TipoProposta").change(function (event) {
 
@@ -136,5 +130,13 @@
 
         });
     </script>
+
+    <script>
+        function myFunction() {
+
+            alert("MAx");
+        }
+    </script>
 }
+
 

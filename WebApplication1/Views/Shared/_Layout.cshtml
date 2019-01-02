@@ -21,8 +21,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*@if (User.Identity.IsAuthenticated)
-        {*@
                     <li>@Html.ActionLink("Consultar Propostas", "ListarPropostas", "Propostas")</li>
                     @*  *@}
                     <li>@Html.ActionLink("Resultados", "VerResultados", "Propostas")</li>
@@ -132,6 +130,7 @@
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Atribuir Propostas", "AtribuirPropostas", "Docente")</li>
                                 <li>@Html.ActionLink("Propostas Atribuidas", "PropostasAtribuidas", "Docente")</li>
+                                <li>@Html.ActionLink("Candidaturas por Aluno", "DefinirMaxCandidaturasPorAluno", "Docente")</li>
                             </ul>
                         </li>
 

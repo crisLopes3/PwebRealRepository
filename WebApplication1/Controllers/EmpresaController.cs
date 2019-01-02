@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     {
         private Context db = new Context();
         // GET: Empresa
-
+        [Authorize(Roles = Constantes.Empresa)]
         public ActionResult ListarPropostasCriadas()
         {
             int id = Session.Get<int>("UserId");

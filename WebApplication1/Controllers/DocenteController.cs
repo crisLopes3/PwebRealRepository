@@ -14,6 +14,7 @@ namespace WebApplication1.Controllers
     {
         private Context db = new Context();
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult ListarPropostasCriadas()
         {
             int id = Session.Get<int>("UserId");
@@ -21,6 +22,7 @@ namespace WebApplication1.Controllers
             return View(db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasCriadas);
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult ListarPropostasAssociadas()
         {
             int id = Session.Get<int>("UserId");
@@ -28,7 +30,7 @@ namespace WebApplication1.Controllers
             return View(db.Docentes.Where(x => x.DocenteId == id).FirstOrDefault().PropostasAssociadas.ToList());
         }
 
-
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult AssociarDocentes(int? id)
         {
             if (id > 0)
@@ -41,6 +43,7 @@ namespace WebApplication1.Controllers
             return View(db.Docentes.Where(x => x.DocenteId != idUser).ToList());
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult Associar(int? id)
         {
             if (id > 0)
@@ -54,6 +57,7 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("ListarPropostasCriadas");
         }
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult Desassociar(int? id)
         {
             if (id > 0)
@@ -68,7 +72,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostasCriadas");
         }
 
-
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult SairDaProposta(int? id)
         {
             if (id > 0)
@@ -85,6 +89,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ListarPropostasAssociadas");
         }
 
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult AtribuirNotaAluno(int? idAluno)
         {
             var aluno = db.Alunos.Where(x => x.AlunoId == idAluno).FirstOrDefault();
@@ -96,6 +101,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Constantes.Comissao + "," + Constantes.Docente)]
         public ActionResult AtribuirNotaAluno(Aluno Aluno, int? NotaAtribuida)
         {
             var aluno = db.Alunos.Where(x => x.AlunoId == Aluno.AlunoId).FirstOrDefault();
@@ -106,17 +112,18 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
 
             }
-            return RedirectToAction("ListarPropostasAssociadas");
+            return RedirectToAction("ListarPropostasCriadas");
         }
 
-
-
         //////////////////////////////////////////////////////////////////COMISSAO
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult AtribuirPropostas()
         {
+            ViewBag.max = db.Settings.Where(x => x.SettingId == "Max_Candidaturas").Select(x=>x.Value).FirstOrDefault();
             return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
         }
 
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult VerCandidatos(int? idProposta)
         {
             if (idProposta > 0)
@@ -128,6 +135,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("AtribuirPropostas");
         }
 
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult AtribuirAluno(int idProposta, int idAluno)
         {
             var proposta = db.Propostas.Where(x => x.PropostaId == idProposta).FirstOrDefault();
@@ -141,12 +149,29 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult PropostasAtribuidas()
         {
             return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).ToList());
         }
+    
+        [Authorize(Roles = Constantes.Comissao)]
+        public ActionResult DefinirMaxCandidaturasPorAluno(string max)
+        {
+
+            var seting = db.Settings.Where(x => x.SettingId == "Max_Candidaturas").FirstOrDefault();
+            if (seting == null)
+                db.Settings.Add(new Setting { SettingId = "Max_Candidaturas", Value = max });
+            else
+                seting.Value = max;
+
+            db.SaveChanges();
+
+            return RedirectToAction("AtribuirPropostas");
+        }
 
         //////////////////////////////////////////////////////////////////Estatisticas
+        [Authorize(Roles = Constantes.Comissao)]
         public ActionResult PropostasComMaisCandidatos()
         {          
             return View(db.Propostas.Where(x=>x.Estado == true).OrderByDescending(x => x.Alunos.Count).ToList());
