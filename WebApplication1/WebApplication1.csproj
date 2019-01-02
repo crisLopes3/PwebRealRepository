@@ -214,13 +214,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812172059292_m.cs" />
-    <Compile Include="Migrations\201812172059292_m.Designer.cs">
-      <DependentUpon>201812172059292_m.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901021511568_m7.cs" />
-    <Compile Include="Migrations\201901021511568_m7.Designer.cs">
-      <DependentUpon>201901021511568_m7.cs</DependentUpon>
+    <Compile Include="Migrations\201901022028272_agora.cs" />
+    <Compile Include="Migrations\201901022028272_agora.Designer.cs">
+      <DependentUpon>201901022028272_agora.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -345,8 +341,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812172059292_m.resx">
-      <DependentUpon>201812172059292_m.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901022028272_agora.resx">
+      <DependentUpon>201901022028272_agora.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -63,13 +63,13 @@
                 @Html.DisplayFor(modelItem => item.Objetivos)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PropostaId }) |
+               @* @Html.ActionLink("Edit", "Edit", new { id = item.PropostaId }) |*@
                 @Html.ActionLink("Associar Docentes", "AssociarDocentes", new { id = item.PropostaId }) |
                 @if (item.PropostaAlunoAtribuido != null)
                 {
                     @Html.ActionLink("Atriubuir Nota", "AtribuirNotaAluno", "Docente", new { idAluno = item.PropostaAlunoAtribuido.AlunoId },null)
                 }
-                @Html.ActionLink("Delete", "Delete", new { id = item.PropostaId })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.PropostaId })*@
             </td>
         </tr>
     }
