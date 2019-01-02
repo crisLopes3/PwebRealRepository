@@ -36,19 +36,19 @@ namespace WebApplication1.Controllers
             if (User.IsInRole("Comissao"))
             {
                 if (tipoOrdenacao == 1)
-                    return View(db.Propostas.Where(x=> x.PropostaAlunoAtribuido != null).OrderBy(x => x.LocalEstagio));
+                    return View(db.Propostas.Where(x=> x.PropostaAlunoAtribuido == null).OrderBy(x => x.LocalEstagio));
                 if (tipoOrdenacao == 0)
-                    return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).OrderBy(x => x.Ramo));
+                    return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido == null).OrderBy(x => x.Ramo));
                 return View(db.Propostas.ToList());
             }
             else
             {
                 if (tipoOrdenacao == 1)
-                    return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido != null).
+                    return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).
                         OrderBy(x => x.LocalEstagio));
                 if (tipoOrdenacao == 0)
                     return View(db.Propostas.Where(x => x.Estado == true 
-                    && x.PropostaAlunoAtribuido != null).OrderBy(x => x.Ramo));
+                    && x.PropostaAlunoAtribuido == null).OrderBy(x => x.Ramo));
                 return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
                 //return View(db.Propostas.Where(x => x.Estado == true).ToList());
             }
