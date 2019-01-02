@@ -36,9 +36,9 @@ namespace WebApplication1.Controllers
             if (User.IsInRole("Comissao"))
             {
                 if (tipoOrdenacao == 1)
-                    return View(db.Propostas.Where(x=> x.PropostaAlunoAtribuido == null).OrderBy(x => x.LocalEstagio));
+                    return View(db.Propostas.OrderBy(x => x.LocalEstagio).ToList());
                 if (tipoOrdenacao == 0)
-                    return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido == null).OrderBy(x => x.Ramo));
+                    return View(db.Propostas.OrderBy(x => x.Ramo).ToList());
                 return View(db.Propostas.ToList());
             }
             else
@@ -101,7 +101,6 @@ namespace WebApplication1.Controllers
                 {
                     var empresa = db.Empresas.Where(x => x.EmpresaId == id).FirstOrDefault();
                     empresa.PropostasCriadas.Add(proposta);
-
                 }
 
                 db.SaveChanges();
