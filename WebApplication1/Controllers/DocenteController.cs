@@ -112,7 +112,6 @@ namespace WebApplication1.Controllers
 
 
         //////////////////////////////////////////////////////////////////COMISSAO
-
         public ActionResult AtribuirPropostas()
         {
             return View(db.Propostas.Where(x => x.Estado == true && x.PropostaAlunoAtribuido == null).ToList());
@@ -146,6 +145,13 @@ namespace WebApplication1.Controllers
         {
             return View(db.Propostas.Where(x => x.PropostaAlunoAtribuido != null).ToList());
         }
+
+        //////////////////////////////////////////////////////////////////Estatisticas
+        public ActionResult PropostasComMaisCandidatos()
+        {          
+            return View(db.Propostas.Where(x=>x.Estado == true).OrderByDescending(x => x.Alunos.Count).ToList());
+        }
+
     }
 }
 

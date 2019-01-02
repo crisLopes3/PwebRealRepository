@@ -6,9 +6,7 @@
 
 <h2>ListaMensagensRecebidas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -36,8 +34,6 @@
         </td>
         <td>
             @Html.ActionLink("Visualizar", "DetalhesMensagem", new { id=item.MensagemId }) 
-            @*@Html.ActionLink("Details", "Details", new { id=item.MensagemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MensagemId })*@
         </td>
     </tr>
 }

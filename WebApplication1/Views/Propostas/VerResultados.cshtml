@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "VerResultados";
+}
+
+<h2>Ver Resultados</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalEstagio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+
+        <th>
+            @Html.DisplayName("Aluno Atríbuido")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalEstagio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoProposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PropostaAlunoAtribuido.Nome)
+        </td>
+    </tr>
+}
+
+</table>

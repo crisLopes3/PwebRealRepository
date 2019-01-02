@@ -25,6 +25,7 @@
         {*@
                     <li>@Html.ActionLink("Consultar Propostas", "ListarPropostas", "Propostas")</li>
                     @*  *@}
+                    <li>@Html.ActionLink("Resultados", "VerResultados", "Propostas")</li>
 
                     @if (User.IsInRole("Admin"))
                     {
@@ -52,6 +53,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Proposta Atribuida", "PropostaAtribuida", "Alunos")</li>
                                 <li>@Html.ActionLink("Consultar Preferencias", "ConsultarPreferencias", "Alunos")</li>
                                 <li>@Html.ActionLink("Avaliar Empresa", "AvaliarEmpresa", "Alunos")</li>
                             </ul>
@@ -67,6 +69,7 @@
                                 <li>@Html.ActionLink("Caixa de Correio", "ListaMensagensRecebidas", "Mensagem")</li>
                             </ul>
                         </li>
+
                     }
                     @if (User.IsInRole("Docente"))
                     {
@@ -129,9 +132,11 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Atribuir Propostas", "AtribuirPropostas", "Docente")</li>
-                                 <li>@Html.ActionLink("Propostas Atribuidas", "PropostasAtribuidas", "Docente")</li>
+                                <li>@Html.ActionLink("Propostas Atribuidas", "PropostasAtribuidas", "Docente")</li>
                             </ul>
                         </li>
+
+                        <li>@Html.ActionLink("Estatísticas", "PropostasComMaisCandidatos", "Docente")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

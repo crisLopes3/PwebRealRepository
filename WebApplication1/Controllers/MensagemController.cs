@@ -13,10 +13,19 @@ namespace WebApplication1.Controllers
     {
         private Context db = new Context();
         // GET: Mensagem
-        public ActionResult NovaMensagem()
+        [HttpGet]
+        public ActionResult NovaMensagem(string email)
         {
+            ViewBag.emailOrientador = email;
             return View();
         }
+
+        //public ActionResult NovaMensagem(string email)
+        //{
+        //    
+        //    return View();
+        //}
+
         [HttpPost]
         public ActionResult NovaMensagem(Mensagem mensagem)
         {

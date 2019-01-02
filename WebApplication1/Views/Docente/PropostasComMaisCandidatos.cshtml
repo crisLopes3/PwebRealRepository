@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication1.Models.Proposta>
+
+@{
+    ViewBag.Title = "PropostasComMaisCandidatos";
+}
+
+<h2>Propostas Com Mais Candidatos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayName("Candidatos")
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalEstagio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoProposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alunos.Count)
+        </td>
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PropostaId })
+        </td>*@
+    </tr>
+}
+
+</table>
